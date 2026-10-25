@@ -1,0 +1,14 @@
+{
+  "datasets": 100,
+  "fold_fits": 3600,
+  "local_enclosures": 3224,
+  "fallbacks": 376,
+  "adaptive_correct": 100,
+  "frozen_incorrect": 1,
+  "one_step_incorrect": 2,
+  "interval_failures": 0,
+  "root_mismatches": 0,
+  "all_local_datasets": 74,
+  "median_speedup_nonboundary": 1.1822448033881017,
+  "median_speedup_boundary": 0.9432362108809639
+}

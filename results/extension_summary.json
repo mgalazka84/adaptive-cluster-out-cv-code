@@ -1,0 +1,38 @@
+{
+  "datasets": 140,
+  "selected_model_agreement": 140,
+  "fits": 5040,
+  "local_enclosures": 5039,
+  "active_faces": 1244,
+  "double_active": 240,
+  "fallbacks": 1,
+  "all_local_datasets": 139,
+  "reference_loss_max_difference": 4.949685106225843e-11,
+  "max_reference_gradient": 9.957759061762772e-10,
+  "max_training_start_objective_spread": 2.8421709430404014e-14,
+  "per_regime_speedup_median": {
+    "balanced": 1.3284609181368427,
+    "boundary": 1.3015939591757333,
+    "near_tie": 1.3348392441065466,
+    "sparse": 1.2823108227353295,
+    "unbalanced": 1.271849900846226,
+    "zero_a": 1.3669050047658642,
+    "zero_both": 1.2960419556496978
+  },
+  "real_data": [
+    {
+      "target": "new_subject",
+      "speedup_total": 1.1279490967065675,
+      "speedup_kernel": 1.5590193879963916,
+      "local_certificates": 63,
+      "numerical_fallbacks": 0
+    },
+    {
+      "target": "new_word",
+      "speedup_total": 1.1368606855936192,
+      "speedup_kernel": 1.7230784687438008,
+      "local_certificates": 237,
+      "numerical_fallbacks": 0
+    }
+  ]
+}

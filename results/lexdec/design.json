@@ -1,0 +1,46 @@
+{
+  "dataset": "languageR::lexdec",
+  "observations": 1659,
+  "response": "Supplied RT = logarithmically transformed reaction time; no further response transform.",
+  "preprocessing": "All supplied rows; no outcome trimming, imputation, or learned normalization.",
+  "columns": [
+    "Intercept",
+    "Trial / 100",
+    "Frequency",
+    "Length",
+    "NativeLanguageOther",
+    "Length * NativeLanguageOther"
+  ],
+  "candidate_column_indices": [
+    [
+      0,
+      1,
+      2
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  ],
+  "model_names": [
+    "Trial + Frequency",
+    "+ Length + NativeLanguage",
+    "+ Length:NativeLanguage"
+  ],
+  "weights": "Equal held-out-group weights; complete 21 by 79 crossed layout.",
+  "random_effects": "Independent subject and word random intercepts in all candidates.",
+  "timing_repeats": 7,
+  "scope": "One computational case study with two prediction tasks, not two independent datasets; no causal or population-best-model claim.",
+  "prospective_design": "Candidate formulas, all-row inclusion, two targets, and timing repetitions fixed before viewing CV results in this development stage; no external preregistration."
+}

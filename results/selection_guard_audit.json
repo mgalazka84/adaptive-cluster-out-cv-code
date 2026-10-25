@@ -1,0 +1,1217 @@
+{
+  "checked_archived_decisions": 151,
+  "all_winners_retained": true,
+  "minimum_gap": 1.439739161224196e-07,
+  "minimum_gap_to_tolerance_ratio": 761.2220482769626,
+  "scope": "Audit of archived final intervals only; no new optimization or timing benchmark.",
+  "records": [
+    {
+      "study": "boundary_v2",
+      "case": "('balanced', np.int64(20261025))",
+      "winner": 1,
+      "gap": 0.009662145910966036,
+      "tolerance": 3.5147133321305395e-10,
+      "gap_to_tolerance_ratio": 27490566.080133375
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('balanced', np.int64(20261026))",
+      "winner": 2,
+      "gap": 5.082333618267043e-05,
+      "tolerance": 3.078224133337691e-10,
+      "gap_to_tolerance_ratio": 165106.02860995423
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('balanced', np.int64(20261027))",
+      "winner": 1,
+      "gap": 0.008253805772801215,
+      "tolerance": 2.9430258439225117e-10,
+      "gap_to_tolerance_ratio": 28045305.10612306
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('balanced', np.int64(20261028))",
+      "winner": 1,
+      "gap": 0.0020114528467531922,
+      "tolerance": 2.1276550617185666e-10,
+      "gap_to_tolerance_ratio": 9453848.431279482
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('balanced', np.int64(20261029))",
+      "winner": 1,
+      "gap": 0.00779236221587043,
+      "tolerance": 2.8557584459508776e-10,
+      "gap_to_tolerance_ratio": 27286489.257937986
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('balanced', np.int64(20261030))",
+      "winner": 2,
+      "gap": 0.005108866660454847,
+      "tolerance": 3.156696591335289e-10,
+      "gap_to_tolerance_ratio": 16184218.256762479
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('balanced', np.int64(20261031))",
+      "winner": 1,
+      "gap": 2.567639120476528e-05,
+      "tolerance": 2.7886807795512083e-10,
+      "gap_to_tolerance_ratio": 92073.61198544019
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('balanced', np.int64(20261032))",
+      "winner": 1,
+      "gap": 0.006671608644813309,
+      "tolerance": 2.8385179666240823e-10,
+      "gap_to_tolerance_ratio": 23503845.046110503
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('balanced', np.int64(20261033))",
+      "winner": 1,
+      "gap": 0.006568082188312729,
+      "tolerance": 2.468445007126102e-10,
+      "gap_to_tolerance_ratio": 26608177.088618428
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('balanced', np.int64(20261034))",
+      "winner": 1,
+      "gap": 0.0007707293583014696,
+      "tolerance": 3.535496111376932e-10,
+      "gap_to_tolerance_ratio": 2179975.1266062115
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('balanced', np.int64(20261035))",
+      "winner": 1,
+      "gap": 0.003436091240998751,
+      "tolerance": 2.6704055726227144e-10,
+      "gap_to_tolerance_ratio": 12867301.043054765
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('balanced', np.int64(20261036))",
+      "winner": 1,
+      "gap": 0.006283992917818004,
+      "tolerance": 2.6936107708051937e-10,
+      "gap_to_tolerance_ratio": 23329253.75086597
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('balanced', np.int64(20261037))",
+      "winner": 1,
+      "gap": 0.003593380324422135,
+      "tolerance": 2.872997213914641e-10,
+      "gap_to_tolerance_ratio": 12507427.111375183
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('balanced', np.int64(20261038))",
+      "winner": 1,
+      "gap": 0.003285207689112113,
+      "tolerance": 2.441111972911532e-10,
+      "gap_to_tolerance_ratio": 13457832.846536007
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('balanced', np.int64(20261039))",
+      "winner": 1,
+      "gap": 0.006273795790288972,
+      "tolerance": 2.7764849536819203e-10,
+      "gap_to_tolerance_ratio": 22596181.484683495
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('balanced', np.int64(20261040))",
+      "winner": 1,
+      "gap": 0.022139051191345516,
+      "tolerance": 2.487371717710667e-10,
+      "gap_to_tolerance_ratio": 89005800.91712993
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('balanced', np.int64(20261041))",
+      "winner": 2,
+      "gap": 0.014306120051495785,
+      "tolerance": 2.574905111684821e-10,
+      "gap_to_tolerance_ratio": 55559795.141868174
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('balanced', np.int64(20261042))",
+      "winner": 1,
+      "gap": 0.0016131516028980997,
+      "tolerance": 2.348594770978857e-10,
+      "gap_to_tolerance_ratio": 6868582.110594429
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('balanced', np.int64(20261043))",
+      "winner": 1,
+      "gap": 0.00594006914447931,
+      "tolerance": 2.603077288298417e-10,
+      "gap_to_tolerance_ratio": 22819411.36047567
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('balanced', np.int64(20261044))",
+      "winner": 1,
+      "gap": 0.006079319560886587,
+      "tolerance": 2.866576632025078e-10,
+      "gap_to_tolerance_ratio": 21207594.77688159
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('boundary', np.int64(20265025))",
+      "winner": 1,
+      "gap": 0.006744603591296583,
+      "tolerance": 1.9950677365657436e-10,
+      "gap_to_tolerance_ratio": 33806388.964549966
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('boundary', np.int64(20265026))",
+      "winner": 2,
+      "gap": 0.00046250987383977815,
+      "tolerance": 1.888071399466703e-10,
+      "gap_to_tolerance_ratio": 2449641.8619042523
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('boundary', np.int64(20265027))",
+      "winner": 1,
+      "gap": 0.016859157916804257,
+      "tolerance": 2.2035030372650668e-10,
+      "gap_to_tolerance_ratio": 76510708.77455847
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('boundary', np.int64(20265028))",
+      "winner": 1,
+      "gap": 0.002599567868640129,
+      "tolerance": 2.1904728086841992e-10,
+      "gap_to_tolerance_ratio": 11867610.76573998
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('boundary', np.int64(20265029))",
+      "winner": 2,
+      "gap": 0.025341843997384927,
+      "tolerance": 2.2224974093627375e-10,
+      "gap_to_tolerance_ratio": 114024177.89387327
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('boundary', np.int64(20265030))",
+      "winner": 1,
+      "gap": 0.007735241302190388,
+      "tolerance": 2.0031231850831793e-10,
+      "gap_to_tolerance_ratio": 38615904.202961855
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('boundary', np.int64(20265031))",
+      "winner": 2,
+      "gap": 0.0002986981853272397,
+      "tolerance": 2.0510651260601002e-10,
+      "gap_to_tolerance_ratio": 1456307.6595281512
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('boundary', np.int64(20265032))",
+      "winner": 1,
+      "gap": 0.011375025556152885,
+      "tolerance": 2.073646444287947e-10,
+      "gap_to_tolerance_ratio": 54855183.1846092
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('boundary', np.int64(20265033))",
+      "winner": 1,
+      "gap": 0.021202756270560563,
+      "tolerance": 2.2339196759507347e-10,
+      "gap_to_tolerance_ratio": 94912796.09924594
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('boundary', np.int64(20265034))",
+      "winner": 1,
+      "gap": 0.0073081245859411,
+      "tolerance": 1.876096788694805e-10,
+      "gap_to_tolerance_ratio": 38953878.23261155
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('boundary', np.int64(20265035))",
+      "winner": 1,
+      "gap": 2.9555418993520988e-05,
+      "tolerance": 1.9360119593198376e-10,
+      "gap_to_tolerance_ratio": 152661.34514946095
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('boundary', np.int64(20265036))",
+      "winner": 1,
+      "gap": 0.006431249926942995,
+      "tolerance": 2.1076542796286792e-10,
+      "gap_to_tolerance_ratio": 30513780.125628736
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('boundary', np.int64(20265037))",
+      "winner": 2,
+      "gap": 0.003955545807685201,
+      "tolerance": 2.1249966871792097e-10,
+      "gap_to_tolerance_ratio": 18614362.2319521
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('boundary', np.int64(20265038))",
+      "winner": 1,
+      "gap": 0.009060207790808628,
+      "tolerance": 2.0417208710959704e-10,
+      "gap_to_tolerance_ratio": 44375349.829015665
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('boundary', np.int64(20265039))",
+      "winner": 1,
+      "gap": 1.439739161224196e-07,
+      "tolerance": 1.8913524174491098e-10,
+      "gap_to_tolerance_ratio": 761.2220482769626
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('boundary', np.int64(20265040))",
+      "winner": 1,
+      "gap": 0.0073011533792815,
+      "tolerance": 1.914173638562171e-10,
+      "gap_to_tolerance_ratio": 38142586.60863051
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('boundary', np.int64(20265041))",
+      "winner": 1,
+      "gap": 0.00645340059674826,
+      "tolerance": 2.2591866188515662e-10,
+      "gap_to_tolerance_ratio": 28565150.585164048
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('boundary', np.int64(20265042))",
+      "winner": 1,
+      "gap": 3.486990271195367e-05,
+      "tolerance": 2.1121679586774866e-10,
+      "gap_to_tolerance_ratio": 165090.57704760903
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('boundary', np.int64(20265043))",
+      "winner": 2,
+      "gap": 0.0002034312941026073,
+      "tolerance": 2.0664648698882515e-10,
+      "gap_to_tolerance_ratio": 984441.0958392352
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('boundary', np.int64(20265044))",
+      "winner": 1,
+      "gap": 0.006795526688794906,
+      "tolerance": 1.976862176726289e-10,
+      "gap_to_tolerance_ratio": 34375318.46579407
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('near_tie', np.int64(20264025))",
+      "winner": 0,
+      "gap": 0.020501497055086304,
+      "tolerance": 3.636349554063951e-10,
+      "gap_to_tolerance_ratio": 56379335.23792843
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('near_tie', np.int64(20264026))",
+      "winner": 0,
+      "gap": 0.01607524134290217,
+      "tolerance": 2.8546320509077824e-10,
+      "gap_to_tolerance_ratio": 56312831.41303689
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('near_tie', np.int64(20264027))",
+      "winner": 0,
+      "gap": 5.841085884616959e-05,
+      "tolerance": 2.887311800441348e-10,
+      "gap_to_tolerance_ratio": 202301.87414203424
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('near_tie', np.int64(20264028))",
+      "winner": 1,
+      "gap": 0.01000025056122511,
+      "tolerance": 2.829857597440888e-10,
+      "gap_to_tolerance_ratio": 35338352.60922172
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('near_tie', np.int64(20264029))",
+      "winner": 0,
+      "gap": 0.023696780246822424,
+      "tolerance": 3.660204005875046e-10,
+      "gap_to_tolerance_ratio": 64741692.56354669
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('near_tie', np.int64(20264030))",
+      "winner": 0,
+      "gap": 0.0028452332530897184,
+      "tolerance": 2.7604663695328367e-10,
+      "gap_to_tolerance_ratio": 10307074.501948114
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('near_tie', np.int64(20264031))",
+      "winner": 2,
+      "gap": 0.0023779884369024007,
+      "tolerance": 2.939260069160297e-10,
+      "gap_to_tolerance_ratio": 8090432.220860799
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('near_tie', np.int64(20264032))",
+      "winner": 0,
+      "gap": 0.00013083205183384017,
+      "tolerance": 2.2785122246892247e-10,
+      "gap_to_tolerance_ratio": 574199.4728673658
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('near_tie', np.int64(20264033))",
+      "winner": 0,
+      "gap": 5.464833842561134e-06,
+      "tolerance": 2.837508437675312e-10,
+      "gap_to_tolerance_ratio": 19259.26904745458
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('near_tie', np.int64(20264034))",
+      "winner": 1,
+      "gap": 0.0003359892690515398,
+      "tolerance": 2.7069915893152795e-10,
+      "gap_to_tolerance_ratio": 1241190.6648610116
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('near_tie', np.int64(20264035))",
+      "winner": 0,
+      "gap": 0.01629822981262219,
+      "tolerance": 3.0983611276581375e-10,
+      "gap_to_tolerance_ratio": 52602744.29320971
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('near_tie', np.int64(20264036))",
+      "winner": 0,
+      "gap": 0.0025176740032564204,
+      "tolerance": 2.789332007868636e-10,
+      "gap_to_tolerance_ratio": 9026082.216653038
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('near_tie', np.int64(20264037))",
+      "winner": 1,
+      "gap": 0.003055740975367094,
+      "tolerance": 3.004308686473711e-10,
+      "gap_to_tolerance_ratio": 10171195.087658422
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('near_tie', np.int64(20264038))",
+      "winner": 0,
+      "gap": 0.00939277989149856,
+      "tolerance": 3.356901578194981e-10,
+      "gap_to_tolerance_ratio": 27980504.261757635
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('near_tie', np.int64(20264039))",
+      "winner": 0,
+      "gap": 0.005474891481230593,
+      "tolerance": 2.536656510877785e-10,
+      "gap_to_tolerance_ratio": 21583101.44772443
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('near_tie', np.int64(20264040))",
+      "winner": 1,
+      "gap": 0.005935362266390687,
+      "tolerance": 3.418073728519449e-10,
+      "gap_to_tolerance_ratio": 17364640.84103186
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('near_tie', np.int64(20264041))",
+      "winner": 1,
+      "gap": 6.240656391698352e-05,
+      "tolerance": 2.7763639962930756e-10,
+      "gap_to_tolerance_ratio": 224778.03342899933
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('near_tie', np.int64(20264042))",
+      "winner": 0,
+      "gap": 0.005335846949509282,
+      "tolerance": 3.381316180016797e-10,
+      "gap_to_tolerance_ratio": 15780384.51725853
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('near_tie', np.int64(20264043))",
+      "winner": 0,
+      "gap": 0.0033403218607233054,
+      "tolerance": 2.709478130684117e-10,
+      "gap_to_tolerance_ratio": 12328285.004019968
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('near_tie', np.int64(20264044))",
+      "winner": 2,
+      "gap": 0.00012017517763363017,
+      "tolerance": 3.106992348652216e-10,
+      "gap_to_tolerance_ratio": 386789.422528707
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('sparse', np.int64(20262025))",
+      "winner": 1,
+      "gap": 0.029089252946786104,
+      "tolerance": 2.647851057215269e-10,
+      "gap_to_tolerance_ratio": 109859853.58775851
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('sparse', np.int64(20262026))",
+      "winner": 2,
+      "gap": 0.01027069736738273,
+      "tolerance": 2.381675205439404e-10,
+      "gap_to_tolerance_ratio": 43123837.137515366
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('sparse', np.int64(20262027))",
+      "winner": 1,
+      "gap": 0.007242087656748497,
+      "tolerance": 2.8983249352802716e-10,
+      "gap_to_tolerance_ratio": 24987148.84791956
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('sparse', np.int64(20262028))",
+      "winner": 1,
+      "gap": 0.021596870998529027,
+      "tolerance": 3.144649334363686e-10,
+      "gap_to_tolerance_ratio": 68678153.594188
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('sparse', np.int64(20262029))",
+      "winner": 1,
+      "gap": 0.011884039256579548,
+      "tolerance": 3.08873208847399e-10,
+      "gap_to_tolerance_ratio": 38475461.50385267
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('sparse', np.int64(20262030))",
+      "winner": 1,
+      "gap": 0.010357025301153566,
+      "tolerance": 2.976314564592197e-10,
+      "gap_to_tolerance_ratio": 34798154.14797275
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('sparse', np.int64(20262031))",
+      "winner": 1,
+      "gap": 0.000533059607949582,
+      "tolerance": 2.5534756680181347e-10,
+      "gap_to_tolerance_ratio": 2087584.442750195
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('sparse', np.int64(20262032))",
+      "winner": 2,
+      "gap": 0.0031461777208634523,
+      "tolerance": 3.3203064030132887e-10,
+      "gap_to_tolerance_ratio": 9475564.417814545
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('sparse', np.int64(20262033))",
+      "winner": 2,
+      "gap": 0.002203845190805076,
+      "tolerance": 3.1717060919666507e-10,
+      "gap_to_tolerance_ratio": 6948453.3777799
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('sparse', np.int64(20262034))",
+      "winner": 1,
+      "gap": 0.03572638605407086,
+      "tolerance": 3.2323346568795015e-10,
+      "gap_to_tolerance_ratio": 110528116.19623922
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('sparse', np.int64(20262035))",
+      "winner": 1,
+      "gap": 0.00918795777369974,
+      "tolerance": 3.1019026010491505e-10,
+      "gap_to_tolerance_ratio": 29620394.175471902
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('sparse', np.int64(20262036))",
+      "winner": 1,
+      "gap": 0.00034977713991279913,
+      "tolerance": 3.055057918261836e-10,
+      "gap_to_tolerance_ratio": 1144911.649045932
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('sparse', np.int64(20262037))",
+      "winner": 1,
+      "gap": 0.020348138026300866,
+      "tolerance": 2.6685520679147214e-10,
+      "gap_to_tolerance_ratio": 76251605.77137043
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('sparse', np.int64(20262038))",
+      "winner": 1,
+      "gap": 4.8623252730806144e-05,
+      "tolerance": 3.5626767874015766e-10,
+      "gap_to_tolerance_ratio": 136479.55072081997
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('sparse', np.int64(20262039))",
+      "winner": 1,
+      "gap": 0.02886175191192386,
+      "tolerance": 2.667441724836173e-10,
+      "gap_to_tolerance_ratio": 108200121.64912982
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('sparse', np.int64(20262040))",
+      "winner": 1,
+      "gap": 0.016674472174296184,
+      "tolerance": 3.2074140642522643e-10,
+      "gap_to_tolerance_ratio": 51987276.479637995
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('sparse', np.int64(20262041))",
+      "winner": 1,
+      "gap": 0.008520050072561514,
+      "tolerance": 2.783384326115963e-10,
+      "gap_to_tolerance_ratio": 30610397.538778644
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('sparse', np.int64(20262042))",
+      "winner": 1,
+      "gap": 0.006239054749322515,
+      "tolerance": 2.533298757494937e-10,
+      "gap_to_tolerance_ratio": 24628183.828945745
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('sparse', np.int64(20262043))",
+      "winner": 1,
+      "gap": 0.03992244676385992,
+      "tolerance": 3.1132976897677314e-10,
+      "gap_to_tolerance_ratio": 128232025.1451391
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('sparse', np.int64(20262044))",
+      "winner": 1,
+      "gap": 0.03621414050119842,
+      "tolerance": 3.046012666841158e-10,
+      "gap_to_tolerance_ratio": 118890314.85464567
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('unbalanced', np.int64(20263025))",
+      "winner": 1,
+      "gap": 2.689281192580495e-05,
+      "tolerance": 3.1349456338592484e-10,
+      "gap_to_tolerance_ratio": 85783.98181884507
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('unbalanced', np.int64(20263026))",
+      "winner": 1,
+      "gap": 0.04173969496737362,
+      "tolerance": 3.7011000189764386e-10,
+      "gap_to_tolerance_ratio": 112776457.68383472
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('unbalanced', np.int64(20263027))",
+      "winner": 1,
+      "gap": 0.00200807199993136,
+      "tolerance": 2.629887118269751e-10,
+      "gap_to_tolerance_ratio": 7635582.477975352
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('unbalanced', np.int64(20263028))",
+      "winner": 1,
+      "gap": 7.449267490411415e-06,
+      "tolerance": 2.976887754257718e-10,
+      "gap_to_tolerance_ratio": 25023.676085055744
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('unbalanced', np.int64(20263029))",
+      "winner": 1,
+      "gap": 0.006166077819674598,
+      "tolerance": 2.924988606615057e-10,
+      "gap_to_tolerance_ratio": 21080690.04347436
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('unbalanced', np.int64(20263030))",
+      "winner": 1,
+      "gap": 0.010345513653731597,
+      "tolerance": 3.593496916449753e-10,
+      "gap_to_tolerance_ratio": 28789543.707060132
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('unbalanced', np.int64(20263031))",
+      "winner": 1,
+      "gap": 0.015547831997756667,
+      "tolerance": 3.3385332253070955e-10,
+      "gap_to_tolerance_ratio": 46570846.981241286
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('unbalanced', np.int64(20263032))",
+      "winner": 0,
+      "gap": 0.0009451479519877459,
+      "tolerance": 2.4787318412998747e-10,
+      "gap_to_tolerance_ratio": 3813030.261039047
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('unbalanced', np.int64(20263033))",
+      "winner": 2,
+      "gap": 0.008170080820444348,
+      "tolerance": 2.9030651869026777e-10,
+      "gap_to_tolerance_ratio": 28142946.487402596
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('unbalanced', np.int64(20263034))",
+      "winner": 1,
+      "gap": 0.002378696759250065,
+      "tolerance": 3.7242854678619774e-10,
+      "gap_to_tolerance_ratio": 6386988.268693639
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('unbalanced', np.int64(20263035))",
+      "winner": 1,
+      "gap": 0.02408876193052567,
+      "tolerance": 2.8371508169815877e-10,
+      "gap_to_tolerance_ratio": 84904763.56189421
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('unbalanced', np.int64(20263036))",
+      "winner": 1,
+      "gap": 0.02273967423597112,
+      "tolerance": 3.028235613292082e-10,
+      "gap_to_tolerance_ratio": 75092156.42322549
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('unbalanced', np.int64(20263037))",
+      "winner": 1,
+      "gap": 0.018779005300648466,
+      "tolerance": 2.294884893643696e-10,
+      "gap_to_tolerance_ratio": 81829835.3554115
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('unbalanced', np.int64(20263038))",
+      "winner": 1,
+      "gap": 0.018214286358510634,
+      "tolerance": 3.132585606480291e-10,
+      "gap_to_tolerance_ratio": 58144576.54670715
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('unbalanced', np.int64(20263039))",
+      "winner": 2,
+      "gap": 0.06926331835052912,
+      "tolerance": 2.7723085233926997e-10,
+      "gap_to_tolerance_ratio": 249839863.6590633
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('unbalanced', np.int64(20263040))",
+      "winner": 2,
+      "gap": 0.003710651908992002,
+      "tolerance": 3.0256325900815475e-10,
+      "gap_to_tolerance_ratio": 12264053.213718167
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('unbalanced', np.int64(20263041))",
+      "winner": 1,
+      "gap": 0.026735965889272073,
+      "tolerance": 2.769160971673143e-10,
+      "gap_to_tolerance_ratio": 96548976.97448786
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('unbalanced', np.int64(20263042))",
+      "winner": 1,
+      "gap": 0.00664173501995835,
+      "tolerance": 3.5019689650466223e-10,
+      "gap_to_tolerance_ratio": 18965716.390550386
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('unbalanced', np.int64(20263043))",
+      "winner": 1,
+      "gap": 0.01103506658633302,
+      "tolerance": 3.3375540305763454e-10,
+      "gap_to_tolerance_ratio": 33063334.66136406
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('unbalanced', np.int64(20263044))",
+      "winner": 1,
+      "gap": 0.01232987091407356,
+      "tolerance": 2.7964137631422885e-10,
+      "gap_to_tolerance_ratio": 44091725.89759631
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_a', np.int64(20266025))",
+      "winner": 1,
+      "gap": 0.005188622754979555,
+      "tolerance": 2.225198357966881e-10,
+      "gap_to_tolerance_ratio": 23317574.077846684
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_a', np.int64(20266026))",
+      "winner": 1,
+      "gap": 0.0062437335874991895,
+      "tolerance": 2.0652153483142317e-10,
+      "gap_to_tolerance_ratio": 30232845.173244268
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_a', np.int64(20266027))",
+      "winner": 1,
+      "gap": 0.012679548232714666,
+      "tolerance": 2.2038047871847972e-10,
+      "gap_to_tolerance_ratio": 57534806.65096422
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_a', np.int64(20266028))",
+      "winner": 1,
+      "gap": 0.00023772813346922828,
+      "tolerance": 1.8619535444769523e-10,
+      "gap_to_tolerance_ratio": 1276767.2650823805
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_a', np.int64(20266029))",
+      "winner": 1,
+      "gap": 0.004929711982507801,
+      "tolerance": 2.0854166340939487e-10,
+      "gap_to_tolerance_ratio": 23638978.9067239
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_a', np.int64(20266030))",
+      "winner": 2,
+      "gap": 0.026829667940906354,
+      "tolerance": 2.0446398271688732e-10,
+      "gap_to_tolerance_ratio": 131219531.10957575
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_a', np.int64(20266031))",
+      "winner": 1,
+      "gap": 0.007173518923536015,
+      "tolerance": 2.0842703168556116e-10,
+      "gap_to_tolerance_ratio": 34417411.530180916
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_a', np.int64(20266032))",
+      "winner": 1,
+      "gap": 0.002745725407887978,
+      "tolerance": 2.0250891715339669e-10,
+      "gap_to_tolerance_ratio": 13558540.761976138
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_a', np.int64(20266033))",
+      "winner": 1,
+      "gap": 0.0009817393758044801,
+      "tolerance": 2.1573919557923674e-10,
+      "gap_to_tolerance_ratio": 4550584.205010195
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_a', np.int64(20266034))",
+      "winner": 1,
+      "gap": 0.0033916032625924686,
+      "tolerance": 2.04220610892231e-10,
+      "gap_to_tolerance_ratio": 16607546.357709445
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_a', np.int64(20266035))",
+      "winner": 1,
+      "gap": 0.004717949806599453,
+      "tolerance": 2.0124354020793193e-10,
+      "gap_to_tolerance_ratio": 23443981.365686078
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_a', np.int64(20266036))",
+      "winner": 1,
+      "gap": 0.018685521573449604,
+      "tolerance": 2.12191363410462e-10,
+      "gap_to_tolerance_ratio": 88059764.88922603
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_a', np.int64(20266037))",
+      "winner": 1,
+      "gap": 0.0010709916496132177,
+      "tolerance": 1.9790591330851102e-10,
+      "gap_to_tolerance_ratio": 5411620.25787311
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_a', np.int64(20266038))",
+      "winner": 1,
+      "gap": 0.0013773295783029438,
+      "tolerance": 1.9804991404496258e-10,
+      "gap_to_tolerance_ratio": 6954456.834504121
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_a', np.int64(20266039))",
+      "winner": 1,
+      "gap": 0.001373237060303012,
+      "tolerance": 1.9371841527483135e-10,
+      "gap_to_tolerance_ratio": 7088830.756512121
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_a', np.int64(20266040))",
+      "winner": 1,
+      "gap": 0.0033083074633627474,
+      "tolerance": 1.9476436658267965e-10,
+      "gap_to_tolerance_ratio": 16986205.03026324
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_a', np.int64(20266041))",
+      "winner": 1,
+      "gap": 0.0074104280204303485,
+      "tolerance": 2.1101884128133023e-10,
+      "gap_to_tolerance_ratio": 35117376.13301918
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_a', np.int64(20266042))",
+      "winner": 1,
+      "gap": 0.0074841887001591,
+      "tolerance": 2.1195197699512478e-10,
+      "gap_to_tolerance_ratio": 35310775.611832336
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_a', np.int64(20266043))",
+      "winner": 1,
+      "gap": 0.0002194227967282636,
+      "tolerance": 2.1728234353305872e-10,
+      "gap_to_tolerance_ratio": 1009851.0222248188
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_a', np.int64(20266044))",
+      "winner": 1,
+      "gap": 0.004574280737570824,
+      "tolerance": 2.0302902840304701e-10,
+      "gap_to_tolerance_ratio": 22530180.89851714
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_both', np.int64(20267025))",
+      "winner": 1,
+      "gap": 0.014692512217411857,
+      "tolerance": 1.9489222986021348e-10,
+      "gap_to_tolerance_ratio": 75387880.92244656
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_both', np.int64(20267026))",
+      "winner": 2,
+      "gap": 0.006803745127931138,
+      "tolerance": 1.9774765572618554e-10,
+      "gap_to_tolerance_ratio": 34406198.66236014
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_both', np.int64(20267027))",
+      "winner": 1,
+      "gap": 0.00046961479528384587,
+      "tolerance": 2.084347289628365e-10,
+      "gap_to_tolerance_ratio": 2253054.457962124
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_both', np.int64(20267028))",
+      "winner": 1,
+      "gap": 0.010070219695470062,
+      "tolerance": 2.0460313893855044e-10,
+      "gap_to_tolerance_ratio": 49218304.99626159
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_both', np.int64(20267029))",
+      "winner": 1,
+      "gap": 0.011878604193734432,
+      "tolerance": 2.2296092240065194e-10,
+      "gap_to_tolerance_ratio": 53276619.3547991
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_both', np.int64(20267030))",
+      "winner": 2,
+      "gap": 0.00791426959819752,
+      "tolerance": 1.9103387738498833e-10,
+      "gap_to_tolerance_ratio": 41428618.350492805
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_both', np.int64(20267031))",
+      "winner": 1,
+      "gap": 0.0122599994980368,
+      "tolerance": 2.0342749438582625e-10,
+      "gap_to_tolerance_ratio": 60267170.5466919
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_both', np.int64(20267032))",
+      "winner": 1,
+      "gap": 0.01447076729571517,
+      "tolerance": 2.2972193339604648e-10,
+      "gap_to_tolerance_ratio": 62992536.59321767
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_both', np.int64(20267033))",
+      "winner": 1,
+      "gap": 0.007015558450332193,
+      "tolerance": 2.0898938892375395e-10,
+      "gap_to_tolerance_ratio": 33568969.632672094
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_both', np.int64(20267034))",
+      "winner": 1,
+      "gap": 0.0010334188361020846,
+      "tolerance": 2.0827820870587031e-10,
+      "gap_to_tolerance_ratio": 4961723.276396499
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_both', np.int64(20267035))",
+      "winner": 1,
+      "gap": 0.00664926611282568,
+      "tolerance": 2.0176928623195246e-10,
+      "gap_to_tolerance_ratio": 32954798.21037645
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_both', np.int64(20267036))",
+      "winner": 1,
+      "gap": 0.0038460054580975456,
+      "tolerance": 1.9266927062426517e-10,
+      "gap_to_tolerance_ratio": 19961696.256160382
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_both', np.int64(20267037))",
+      "winner": 2,
+      "gap": 0.002916857771390724,
+      "tolerance": 2.0799876633392243e-10,
+      "gap_to_tolerance_ratio": 14023437.844376363
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_both', np.int64(20267038))",
+      "winner": 1,
+      "gap": 0.010754036579358583,
+      "tolerance": 2.106357296207637e-10,
+      "gap_to_tolerance_ratio": 51055139.594410434
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_both', np.int64(20267039))",
+      "winner": 2,
+      "gap": 0.00013082105729100846,
+      "tolerance": 2.0354700636628817e-10,
+      "gap_to_tolerance_ratio": 642706.8598375382
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_both', np.int64(20267040))",
+      "winner": 1,
+      "gap": 0.00021785888937597697,
+      "tolerance": 2.1941364247509852e-10,
+      "gap_to_tolerance_ratio": 992914.0545611334
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_both', np.int64(20267041))",
+      "winner": 1,
+      "gap": 0.0044144687855719456,
+      "tolerance": 1.9810934958812852e-10,
+      "gap_to_tolerance_ratio": 22282990.655159254
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_both', np.int64(20267042))",
+      "winner": 1,
+      "gap": 0.01297200606368587,
+      "tolerance": 1.9098227483296214e-10,
+      "gap_to_tolerance_ratio": 67922565.45813747
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_both', np.int64(20267043))",
+      "winner": 1,
+      "gap": 0.007727311063736586,
+      "tolerance": 2.0317822835332157e-10,
+      "gap_to_tolerance_ratio": 38032180.54593427
+    },
+    {
+      "study": "boundary_v2",
+      "case": "('zero_both', np.int64(20267044))",
+      "winner": 1,
+      "gap": 0.00890144672221993,
+      "tolerance": 1.9303292057601155e-10,
+      "gap_to_tolerance_ratio": 46113619.87197807
+    },
+    {
+      "study": "boundary_scale_960",
+      "case": "('balanced', np.int64(20261025))",
+      "winner": 1,
+      "gap": 0.0009335074723419989,
+      "tolerance": 2.7468678985297064e-10,
+      "gap_to_tolerance_ratio": 3398443.2700300943
+    },
+    {
+      "study": "boundary_scale_960",
+      "case": "('balanced', np.int64(20261026))",
+      "winner": 1,
+      "gap": 1.0354241866794567e-05,
+      "tolerance": 2.984262141607173e-10,
+      "gap_to_tolerance_ratio": 34696.15394181925
+    },
+    {
+      "study": "boundary_scale_960",
+      "case": "('balanced', np.int64(20261027))",
+      "winner": 1,
+      "gap": 0.0010256921476547998,
+      "tolerance": 2.7554051523920774e-10,
+      "gap_to_tolerance_ratio": 3722473.0699380287
+    },
+    {
+      "study": "boundary_scale_960",
+      "case": "('boundary', np.int64(20262025))",
+      "winner": 1,
+      "gap": 3.460252436093825e-05,
+      "tolerance": 2.1046361518906814e-10,
+      "gap_to_tolerance_ratio": 164410.95687657638
+    },
+    {
+      "study": "boundary_scale_960",
+      "case": "('boundary', np.int64(20262026))",
+      "winner": 1,
+      "gap": 0.001887386496849608,
+      "tolerance": 2.0418769892699096e-10,
+      "gap_to_tolerance_ratio": 9243389.816173298
+    },
+    {
+      "study": "boundary_scale_960",
+      "case": "('boundary', np.int64(20262027))",
+      "winner": 1,
+      "gap": 0.0019021732421331539,
+      "tolerance": 2.0574465086654137e-10,
+      "gap_to_tolerance_ratio": 9245310.797251396
+    },
+    {
+      "study": "boundary_scale_960",
+      "case": "('zero_both', np.int64(20263025))",
+      "winner": 1,
+      "gap": 0.0011026737666064435,
+      "tolerance": 2.0031575209974836e-10,
+      "gap_to_tolerance_ratio": 5504678.264430053
+    },
+    {
+      "study": "boundary_scale_960",
+      "case": "('zero_both', np.int64(20263026))",
+      "winner": 1,
+      "gap": 0.0008803889079553873,
+      "tolerance": 2.036193304630927e-10,
+      "gap_to_tolerance_ratio": 4323700.043375613
+    },
+    {
+      "study": "boundary_scale_960",
+      "case": "('zero_both', np.int64(20263027))",
+      "winner": 1,
+      "gap": 0.0014922578320377688,
+      "tolerance": 1.9465157387992076e-10,
+      "gap_to_tolerance_ratio": 7666302.420746583
+    },
+    {
+      "study": "lexdec",
+      "case": "('new_subject',)",
+      "winner": 2,
+      "gap": 3.910564153679352e-05,
+      "tolerance": 1.051632799846174e-10,
+      "gap_to_tolerance_ratio": 371856.4269059851
+    },
+    {
+      "study": "lexdec",
+      "case": "('new_word',)",
+      "winner": 2,
+      "gap": 0.00018693463805871668,
+      "tolerance": 1.0330166122316905e-10,
+      "gap_to_tolerance_ratio": 1809599.5344631493
+    }
+  ]
+}

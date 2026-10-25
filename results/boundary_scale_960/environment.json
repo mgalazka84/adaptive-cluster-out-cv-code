@@ -1,0 +1,22 @@
+{
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "numpy": "2.3.5",
+  "scipy": "1.17.0",
+  "pandas": "2.2.3",
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "parameters": {
+    "reps": 3,
+    "timing_reps": 5,
+    "na": 24,
+    "nb": 20,
+    "regimes": [
+      "balanced",
+      "boundary",
+      "zero_both"
+    ],
+    "out": "research_acv/results/boundary_scale_960"
+  },
+  "scope": "Float64 local KKT and root checks; true zero random variances; no global proof.",
+  "timing": "One warm-up plus randomized-order repeats; medians; common setup included once in each total.",
+  "audit": "Three training-only initializations per fold, excluded from timing."
+}

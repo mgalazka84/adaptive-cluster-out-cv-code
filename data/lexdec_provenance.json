@@ -1,0 +1,67 @@
+{
+  "dataset": "lexdec",
+  "package": "languageR",
+  "version": "1.6",
+  "retrieved": "2026-10-25",
+  "rows": 1659,
+  "columns": [
+    "Subject",
+    "RT",
+    "Trial",
+    "Sex",
+    "NativeLanguage",
+    "Correct",
+    "PrevType",
+    "PrevCorrect",
+    "Word",
+    "Frequency",
+    "FamilySize",
+    "SynsetCount",
+    "Length",
+    "Class",
+    "FreqSingular",
+    "FreqPlural",
+    "DerivEntropy",
+    "Complex",
+    "rInfl",
+    "meanRT",
+    "SubjFreq",
+    "meanSize",
+    "meanWeight",
+    "BNCw",
+    "BNCc",
+    "BNCd",
+    "BNCcRatio",
+    "BNCdRatio"
+  ],
+  "subjects": 21,
+  "words": 79,
+  "primary_documentation": "https://cran.r-project.org/web/packages/languageR/languageR.pdf",
+  "distribution": "CRAN package read-only mirror; authors R. H. Baayen and Elnaz Shafaei-Bajestan",
+  "collection": "With Jen Hay, University of Canterbury, Christchurch, New Zealand, 2004 (package documentation).",
+  "declared_package_license": "GPL (>= 2)",
+  "source_files": {
+    "lexdec.rda": {
+      "url": "https://raw.githubusercontent.com/cran/languageR/master/data/lexdec.rda",
+      "sha256": "a10242dd3632aa7f287fa173685ba856eebde4411e18f97d345cae05b3526050",
+      "bytes": 39596
+    },
+    "lexdec.Rd": {
+      "url": "https://raw.githubusercontent.com/cran/languageR/master/man/lexdec.Rd",
+      "sha256": "1602abb4b5b0ce098c638d1c9c79678b95eb28f3f3da05c36710fa19531ab850",
+      "bytes": 5400
+    },
+    "languageR_DESCRIPTION": {
+      "url": "https://raw.githubusercontent.com/cran/languageR/master/DESCRIPTION",
+      "sha256": "f6b40ea50235fbc186615943d9772f8a1f3648fc40332a235c452b869d39621d",
+      "bytes": 1232
+    },
+    "GPL-2.txt": {
+      "url": "https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt",
+      "sha256": "edaef632cbb643e4e7a221717a6c441a4c1a7c918e6e4d56debc3d8739b233f6",
+      "bytes": 17984
+    }
+  },
+  "csv_sha256": "d44ffca3f3836d24126b76857e5254717d8755867f0424fb550b9a9814ae5bca",
+  "conversion": "pyreadr 0.5.4; CSV with 17 significant digits, no dropped rows."
+}

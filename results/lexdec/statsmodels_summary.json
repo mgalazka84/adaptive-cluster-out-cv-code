@@ -1,0 +1,30 @@
+{
+  "statsmodels_version": "0.14.6",
+  "fits": 300,
+  "converged": 253,
+  "contained": 300,
+  "max_absolute_loss_difference": 2.8107349780981394e-11,
+  "max_absolute_variance_difference": 6.610997433514898e-09,
+  "max_original_coordinate_gradient": 0.0016999967920128256,
+  "seconds_for_audit": 130.339856177,
+  "winners": {
+    "new_subject": {
+      "scores": [
+        0.05580340275407063,
+        0.05166982194530688,
+        0.05155726388923884
+      ],
+      "winner": 2
+    },
+    "new_word": {
+      "scores": [
+        0.03316782813519399,
+        0.033019263117009166,
+        0.032826994357939995
+      ],
+      "winner": 2
+    }
+  },
+  "scope": "Independent implementation and initialization; still numerical, not a global or rounding-verified reference.",
+  "warnings": "All warning texts are preserved per fold; a software boundary warning is not an exact-zero identification."
+}
