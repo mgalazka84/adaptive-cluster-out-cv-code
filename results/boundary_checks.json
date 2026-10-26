@@ -8,6 +8,8 @@
   "wrong_faces_rejected": 10,
   "full_neighbourhood_checks": 380,
   "identical_model_tie_checks": 2,
+  "gradient_only_terminal_check": true,
+  "directional_subset_checks": 19,
   "max_dense_compressed_difference": 4.149569576838985e-12,
   "max_sampled_active_bound_violation": 0.0,
   "scope": "Numerical checks, not directed-rounding verification or a theorem proof."

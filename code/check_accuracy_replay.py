@@ -1,4 +1,4 @@
-"""Replay default adaptive decisions after adding persistent root anchors.
+"""Replay the directional-bound default decisions and persistent root anchors.
 
 Checks every archived final interval and fit against released code; timings
 are not repeated. A trace records unsuccessful tests after a valid anchor.
@@ -11,7 +11,7 @@ from accuracy_io import read_csv
 import boundary_acv as bc
 from run_accuracy_benchmark import problem
 from run_lexdec import make_problem
-ROOT=Path(__file__).resolve().parents[1];BASE=ROOT/'results'/'accuracy'
+ROOT=Path(__file__).resolve().parents[1];BASE=ROOT/'results'/'accuracy_v2'
 original=bc.State.refine
 trace={'failed_test_after_valid_anchor':0,'valid_refinements':0}
 def traced(self):

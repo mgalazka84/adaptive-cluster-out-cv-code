@@ -9,7 +9,8 @@ from dataclasses import dataclass
 import numpy as np
 from scipy.linalg import eigh
 from scipy.optimize import minimize
-from acv import CompressedFold
+from acv import CompressedFold, Evaluation
+from scipy.linalg import cholesky
 
 LOWER = np.array([1e-10, 0., 0.])
 
@@ -48,7 +49,8 @@ def active_step(fold, theta, ev=None):
     return theta.copy()
 
 
-def fit_box(fold, start, gtol=1e-9, method='lbfgs', ftol=1e-14, polish=True):
+def fit_box(fold, start, gtol=1e-9, method='lbfgs', ftol=1e-14, polish=True,
+            terminal_hessian=True):
     """Numerical reference with exact nonnegative random-effect variances."""
     before = fold.evaluations
     theta = np.maximum(np.asarray(start, float), LOWER)
@@ -91,7 +93,15 @@ def fit_box(fold, start, gtol=1e-9, method='lbfgs', ftol=1e-14, polish=True):
             break
         theta = proposal
         newton_iterations += 1
-    ev = fold.evaluate(theta)
+    if terminal_hessian:
+        ev = fold.evaluate(theta)
+    else:
+        if polish or method != 'lbfgs':
+            raise ValueError('Gradient-only termination requires unpolished L-BFGS-B')
+        # Reuse the optimizer's final value/gradient. Prediction only needs
+        # a contrast Cholesky factor; no whitened derivatives or Hessian.
+        chol = cholesky(np.einsum('i,ijk->jk',theta,fold.C),lower=True,check_finite=False)
+        ev = Evaluation(float(opt.fun),np.asarray(opt.jac)/scale,None,None,None,chol)
     return theta, ev, {
         'n_eval': fold.evaluations-before,
         'iterations': newton_iterations+lbfgs_iterations,
@@ -125,7 +135,7 @@ compressed scalar block is included in trace, quadratic, and vector norms.
     return float(max(bound1, bound2))
 
 
-def face_certificate(fold, theta, ev=None, allow_boundary=True):
+def face_certificate(fold, theta, ev=None, allow_boundary=True, loss_bound='directional'):
     if ev is None:
         ev = fold.evaluate(theta)
     if theta[0] <= 0 or np.any(theta[1:] < 0):
@@ -158,11 +168,14 @@ def face_certificate(fold, theta, ev=None, allow_boundary=True):
     L = f2*a/(1-a*r)**3+3*b*b*a/(1-a*r)**2
     if L*r >= 1:
         return {'valid': False, 'reason': 'contraction', 'eta': eta, 'Lr': float(L*r)}
+    self_map = eta+.5*L*r*r
+    if self_map > r:
+        return {'valid': False, 'reason': 'self_map', 'eta': eta, 'Lr': float(L*r)}
     rho = 2*eta/(1+np.sqrt(max(0., 1-2*L*eta))) if eta else 0.
     lower = np.array([active_gradient_lower(ev, j, a*rho) for j in active])
     if np.any(lower <= 0):
         return {'valid': False, 'reason': 'active_gradient_not_separated',
-                'active_lower': lower, 'active': active, 'eta': eta}
+                'active_lower': lower, 'active': active, 'eta': eta, 'Lr': float(L*r)}
     mu, G = fold.prediction_geometry(theta, ev, S)
     Gw = np.array([g@ev.w for g in G]).T
     c0 = np.sqrt(max(0., np.linalg.eigvalsh(Gw.T@Gw)[-1]))
@@ -171,11 +184,21 @@ def face_certificate(fold, theta, ev=None, allow_boundary=True):
     radius = rho*c0+c*a_pred*rho*rho*np.linalg.norm(ev.w)/(1-a_pred*rho)
     residual = np.linalg.norm(fold.test[1]-mu)
     ns = len(mu)
+    norm_lo, norm_hi = max(0., residual-radius)**2/ns, (residual+radius)**2/ns
+    if loss_bound not in ('norm','directional'):
+        raise ValueError('Unknown loss bound')
+    lo, hi, Gamma = norm_lo, norm_hi, np.nan
+    if loss_bound == 'directional':
+        gamma = (fold.test[1]-mu) @ Gw
+        Gamma = rho*np.linalg.norm(gamma)+residual*c*a_pred*rho*rho*np.linalg.norm(ev.w)/(1-a_pred*rho)
+        directional_lo = max(0., (residual*residual-2*Gamma)/ns)
+        directional_hi = (residual*residual+2*Gamma+radius*radius)/ns
+        lo, hi = max(norm_lo,directional_lo), min(norm_hi,directional_hi)
     return {'valid': True, 'reason': 'active_face' if len(active) else 'interior',
-            'lo': float(max(0., residual-radius)**2/ns),
-            'hi': float((residual+radius)**2/ns), 'mse': float(residual**2/ns),
-            'raw_lo': float(max(0., residual-radius)**2/ns),
-            'raw_hi': float((residual+radius)**2/ns),
+            'lo': float(lo), 'hi': float(hi), 'mse': float(residual**2/ns),
+            'raw_lo': float(lo), 'raw_hi': float(hi),
+            'norm_lo': float(norm_lo), 'norm_hi': float(norm_hi),
+            'Gamma': float(Gamma), 'self_map': float(self_map),
             'eta': eta, 'radius': float(rho), 'outer_radius': float(r),
             'Lr': float(L*r), 'a': a, 'prediction_radius': float(radius),
             'f2': f2, 'b0': float(b0), 'b_r': float(b), 'c': c, 'c0': float(c0),
@@ -183,6 +206,26 @@ def face_certificate(fold, theta, ev=None, allow_boundary=True):
             'quadratic_L': float(3*b*b*a/(1-a*r)**2),
             'active': active, 'free': free, 'active_lower': lower,
             'S': S, 'theta': theta.copy()}
+
+
+def reporting_radius(ev, cert):
+    """Larger admissible uniqueness radius; never used for acceptance/anchoring.
+
+    Returns a numerical lower approximation to the admissibility supremum.
+    Since R >= r >= 2 eta, contraction also implies the self-map inequality.
+    """
+    a, f2, b0 = cert['a'], cert['f2'], cert['b0']
+    wnorm = np.sqrt(ev.w@ev.w+ev.extra_w2)
+    free = cert['free']; S = cert['S']
+    hi = min(1/a, np.min(cert['theta'][free]/np.linalg.norm(S[free],axis=1)))
+    lo = cert['outer_radius']
+    for _ in range(60):
+        R = (lo+hi)/2
+        b = b0+a*a*R/(1-a*R)*wnorm
+        L = f2*a/(1-a*R)**3+3*b*b*a/(1-a*R)**2
+        if L*R<1 and cert['eta']+.5*L*R*R<=R:lo=R
+        else:hi=R
+    return float(cert['outer_radius']+.99*(lo-cert['outer_radius']))
 
 
 def boundary_tube(ev, cert):
@@ -245,6 +288,8 @@ class State:
     fallback_reason: str = ''
     fallback_iterations: int = 0
     anchor: object = None
+    loss_bound: str = 'directional'
+    trace: object = None
 
     def refine(self):
         if self.numerical:
@@ -259,8 +304,14 @@ class State:
         self.theta = active_step(self.fold, self.theta, self.ev)
         self.steps += 1
         self.ev = self.fold.evaluate(self.theta)
-        self.cert = face_certificate(self.fold, self.theta, self.ev, self.allow_boundary)
+        self.cert = face_certificate(self.fold, self.theta, self.ev, self.allow_boundary, self.loss_bound)
         self.checks += 1
+        if self.trace is not None:
+            self.trace.append(dict(model=self.model,group_index=self.group,step=self.steps,
+                had_anchor=old is not None,valid=self.cert['valid'],reason=self.cert['reason'],
+                Lr=self.cert.get('Lr',np.nan),eta=self.cert.get('eta',np.nan),
+                outer_radius=self.cert.get('outer_radius',np.nan),
+                self_map=self.cert.get('self_map',np.nan)))
         if old and self.cert['valid'] and not same_root(old, self.cert):
             self.complete('root_anchor')
             return
@@ -286,7 +337,8 @@ class State:
 
 
 def adaptive(folds, starts, allow_boundary=True,
-             selection_atol=1e-10, selection_rtol=1e-10):
+             selection_atol=1e-10, selection_rtol=1e-10,
+             loss_bound='directional', audit_trace=None):
     """Refine until loss intervals separate beyond a numerical tie tolerance.
 
     The tolerance is a conservative decision guard, not a bound on all
@@ -299,7 +351,8 @@ def adaptive(folds, starts, allow_boundary=True,
     states = []
     for m, fs in enumerate(folds):
         for k, fold in enumerate(fs):
-            s = State(fold, starts[m].copy(), m, k, allow_boundary)
+            s = State(fold, starts[m].copy(), m, k, allow_boundary,
+                      loss_bound=loss_bound, trace=None if audit_trace is None else audit_trace['tests'])
             while s.cert is None or 'lo' not in s.cert:
                 s.refine()
             states.append(s)
@@ -310,6 +363,10 @@ def adaptive(folds, starts, allow_boundary=True,
         best = int(np.argmin(upper))
         other_lower = np.min(np.delete(lower, best))
         margin = selection_atol+selection_rtol*max(abs(upper[best]), abs(other_lower))
+        if audit_trace is not None:
+            audit_trace['decisions'].append(dict(round=rounds,gap=float(other_lower-upper[best]),
+                guard=float(margin),zero_resolves=bool(upper[best]<other_lower),
+                default_resolves=bool(upper[best]+margin<other_lower)))
         if upper[best]+margin < other_lower:
             return best, states, lower, upper, rounds
         active = np.flatnonzero(lower <= upper[best]+margin)

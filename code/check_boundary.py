@@ -32,6 +32,8 @@ def main():
         ev = f.evaluate(center)
         c = face_certificate(f, center, ev)
         assert c['valid'], (seed, c)
+        norm = face_certificate(f, center, ev, loss_bound='norm')
+        assert c['lo'] >= norm['lo'] and c['hi'] <= norm['hi']
         assert c['radius'] > 1e-8
         free = c['free']
         distance = np.linalg.norm(np.linalg.solve(c['S'][free], (ref-center)[free]))
@@ -101,7 +103,18 @@ def main():
     assert counts['face_enclosures'] >= 10 and counts['double_active'] > 0
     assert counts['wrong_faces_rejected'] > 0
     assert max_compression < 1e-8
+    # The practical fit must never request a Hessian, including at termination.
+    f=folds[0]
+    full_theta,full_ev,_=fit_box(f,theta,gtol=1e-6,ftol=1e-9,polish=False)
+    original=f.evaluate
+    def forbidden(*args,**kwargs):raise AssertionError('Unnecessary Hessian')
+    f.evaluate=forbidden
+    light_theta,light_ev,_=fit_box(f,theta,gtol=1e-6,ftol=1e-9,polish=False,terminal_hessian=False)
+    assert np.array_equal(full_theta,light_theta)
+    assert np.allclose(f.prediction(light_theta,light_ev)[0],f.prediction(full_theta,full_ev)[0],atol=1e-13,rtol=1e-13)
+    f.evaluate=original
     result = {'status': 'passed', **counts, 'identical_model_tie_checks': 2,
+              'gradient_only_terminal_check':True,'directional_subset_checks':counts['face_enclosures'],
               'max_dense_compressed_difference': float(max_compression),
               'max_sampled_active_bound_violation': float(max_kkt_violation),
               'scope': 'Numerical checks, not directed-rounding verification or a theorem proof.'}

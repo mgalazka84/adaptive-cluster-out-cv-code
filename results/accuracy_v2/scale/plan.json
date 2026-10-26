@@ -1,0 +1,104 @@
+{
+  "suite": "scale",
+  "jobs": [
+    [
+      "balanced",
+      20261025,
+      24,
+      20,
+      3
+    ],
+    [
+      "balanced",
+      20261026,
+      24,
+      20,
+      3
+    ],
+    [
+      "balanced",
+      20261027,
+      24,
+      20,
+      3
+    ],
+    [
+      "boundary",
+      20262025,
+      24,
+      20,
+      3
+    ],
+    [
+      "boundary",
+      20262026,
+      24,
+      20,
+      3
+    ],
+    [
+      "boundary",
+      20262027,
+      24,
+      20,
+      3
+    ],
+    [
+      "zero_both",
+      20263025,
+      24,
+      20,
+      3
+    ],
+    [
+      "zero_both",
+      20263026,
+      24,
+      20,
+      3
+    ],
+    [
+      "zero_both",
+      20263027,
+      24,
+      20,
+      3
+    ]
+  ],
+  "timing_repeats": 3,
+  "methods": [
+    "newton",
+    "lbfgs",
+    "practical",
+    "default_lbfgs",
+    "loose",
+    "certify_once",
+    "adaptive",
+    "norm_only",
+    "interior_only",
+    "frozen",
+    "one_step"
+  ],
+  "selection_atol": 1e-10,
+  "selection_rtol": 1e-10,
+  "interval_intersection": true,
+  "loss_bound": "directional",
+  "unpolished_terminal_hessian": false,
+  "fresh_seeds_fixed_before_results": true,
+  "fold_se_scope": "descriptive iid-fold proxy, not a calibrated CV standard error",
+  "practical": {
+    "gtol_original": 1e-06,
+    "ftol": 1e-09,
+    "polish": false
+  },
+  "default_lbfgs": {
+    "gtol_scaled": 1e-05,
+    "ftol": 2.220446049250313e-09,
+    "polish": false
+  },
+  "loose": {
+    "gtol_original": 0.001,
+    "ftol": 1e-05,
+    "polish": false
+  }
+}

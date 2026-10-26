@@ -1,6 +1,6 @@
 """Accuracy, work and runtime benchmarks using the released default tie guard.
 
-The fixed plan is recorded before outcomes in results/accuracy/plan.json.
+The fixed plan is recorded before outcomes in results/accuracy_v2/<suite>/plan.json.
 Fold-difference SEs are descriptive iid-fold proxies; training sets overlap.
 No statistical confidence claim is based on those proxies.
 """
@@ -11,18 +11,19 @@ import numpy as np
 import pandas as pd
 import scipy
 from acv import CompressedFold, make_fold
-from boundary_acv import adaptive, fit_box, active_step, face_certificate, boundary_tube
+from boundary_acv import adaptive, fit_box, active_step, face_certificate, boundary_tube, reporting_radius
 from run_boundary_study import simulation
 from run_lexdec import make_problem
 
 ROOT=Path(__file__).resolve().parents[1]
 METHODS=['newton','lbfgs','practical','default_lbfgs','loose','certify_once',
-         'adaptive','interior_only','frozen','one_step']
+         'adaptive','norm_only','interior_only','frozen','one_step']
 
-def run(name, folds, starts):
+def run(name, folds, starts, audit_trace=None):
     M,G=len(folds),len(folds[0])
-    if name in ['adaptive','interior_only']:
-        winner,states,lo,hi,rounds=adaptive(folds,starts,allow_boundary=name=='adaptive')
+    if name in ['adaptive','norm_only','interior_only']:
+        winner,states,lo,hi,rounds=adaptive(folds,starts,allow_boundary=name!='interior_only',
+            loss_bound='norm' if name=='norm_only' else 'directional',audit_trace=audit_trace)
         return dict(winner=winner,states=states,lower=lo,upper=hi,rounds=rounds,
                     scores=np.array([s.cert['mse'] for s in states]).reshape(M,G),
                     iterations=[s.steps+s.fallback_iterations for s in states],
@@ -34,13 +35,14 @@ def run(name, folds, starts):
             if name in ['newton','lbfgs']:
                 theta,ev,meta=fit_box(fold,starts[m],method=name)
             elif name in ['practical','certify_once']:
-                theta,ev,meta=fit_box(fold,starts[m],gtol=1e-6,ftol=1e-9,polish=False)
+                theta,ev,meta=fit_box(fold,starts[m],gtol=1e-6,ftol=1e-9,polish=False,
+                                    terminal_hessian=name=='certify_once')
             elif name=='default_lbfgs':
                 scale=max(float(np.var(fold.y)),1e-5)
                 theta,ev,meta=fit_box(fold,starts[m],gtol=1e-5/scale,
-                                    ftol=1e7*np.finfo(float).eps,polish=False)
+                                    ftol=1e7*np.finfo(float).eps,polish=False,terminal_hessian=False)
             elif name=='loose':
-                theta,ev,meta=fit_box(fold,starts[m],gtol=1e-3,ftol=1e-5,polish=False)
+                theta,ev,meta=fit_box(fold,starts[m],gtol=1e-3,ftol=1e-5,polish=False,terminal_hessian=False)
             else:
                 theta=starts[m].copy();ev=fold.evaluate(theta)
                 if name=='one_step':theta=active_step(fold,theta,ev);ev=fold.evaluate(theta)
@@ -76,7 +78,8 @@ def problem(regime,seed,na=12,nb=10,models=3):
     return folds,starts,perf_counter()-t
 
 def benchmark(folds,starts,setup,seed,repeats,audit=True):
-    canonical={name:run(name,folds,starts) for name in METHODS}
+    trace={'tests':[],'decisions':[]}
+    canonical={name:run(name,folds,starts,trace if name=='adaptive' else None) for name in METHODS}
     rng=np.random.default_rng(seed+700000)
     timing=[]
     for rep in range(repeats):
@@ -96,6 +99,8 @@ def benchmark(folds,starts,setup,seed,repeats,audit=True):
                  active_face_certificates=sum(s.cert.get('reason')=='active_face' for s in ad['states']),
                  numerical_fallbacks=ad['fallback'],interior_only_fallbacks=canonical['interior_only']['fallback'],
                  refinement_rounds=ad['rounds'],
+                 norm_refinement_rounds=canonical['norm_only']['rounds'],
+                 tie_guard_binding_events=sum(d['zero_resolves'] and not d['default_resolves'] for d in trace['decisions']),
                  cert_once_valid_fits=canonical['certify_once']['valid_fits'],
                  cert_once_resolves=canonical['certify_once']['certified_winner']==best,
                  independent_ref_max_loss_difference=float(np.max(np.abs(canonical['lbfgs']['scores']-score))))
@@ -121,6 +126,9 @@ def benchmark(folds,starts,setup,seed,repeats,audit=True):
         for name in METHODS:
             row[name+'_loss']=float(canonical[name]['scores'][m,k])
         row['contained']=c['lo']-1e-8<=loss_ref<=c['hi']+1e-8
+        excess=max(c['lo']-loss_ref,loss_ref-c['hi'],0.)
+        row.update(contained_no_tolerance=excess==0,containment_excess=excess,
+                   containment_excess_relative_width=excess/(c['hi']-c['lo']) if c['hi']>c['lo'] else (np.inf if excess else 0.))
         for j in range(3):row[f'theta_{j}']=s.theta[j];row[f'reference_theta_{j}']=theta_ref[j]
         if c['valid']:
             free=c['free'];act=c['active']
@@ -130,13 +138,21 @@ def benchmark(folds,starts,setup,seed,repeats,audit=True):
                        loss_error=le,loss_half_width=width,loss_ratio=width/le if le>1e-12*max(1,abs(loss_ref)) else np.nan,
                        active_match=np.array_equal(np.flatnonzero(theta_ref==0),act),
                        reference_in_ball=bool(err<=c['outer_radius']+1e-7 and np.all(theta_ref[act]==0)),
+                       reference_in_rho=bool(err<=c['radius'] and np.all(theta_ref[act]==0)),
+                       reference_in_r=bool(err<=c['outer_radius'] and np.all(theta_ref[act]==0)),
+                       outer_radius=c['outer_radius'],eta=c['eta'],self_map=c['self_map'],
+                       norm_loss_half_width=(c['norm_hi']-c['norm_lo'])/2,
                        Lr=c['Lr'],a=c['a'],f2=c['f2'],b0=c['b0'],b_r=c['b_r'],c=c['c'],c0=c['c0'],
                        trace_L=c['trace_L'],quadratic_L=c['quadratic_L'],
                        active_margin_fraction=min((lower/s.ev.gradient[j] for j,lower in zip(act,c['active_lower'])),default=np.nan))
+            row['reporting_radius']=reporting_radius(s.ev,c)
             if len(act):
                 tube=boundary_tube(s.ev,c)
+                larger=boundary_tube(s.ev,dict(c,outer_radius=row['reporting_radius']))
                 row.update(tube_epsilon=tube['active_epsilon'] if tube else np.nan,
-                           tube_free_radius=tube['free_radius'] if tube else np.nan)
+                           tube_free_radius=tube['free_radius'] if tube else np.nan,
+                           larger_tube_epsilon=larger['active_epsilon'] if larger else np.nan,
+                           larger_tube_free_radius=larger['free_radius'] if larger else np.nan)
         if audit:
             scale=max(float(np.var(s.fold.y)),1e-4)
             audit_fits=[fit_box(s.fold,scale*np.array(v)) for v in ([.5,.25,.25],[.8,.1,.1],[.1,.45,.45])]
@@ -160,12 +176,13 @@ def benchmark(folds,starts,setup,seed,repeats,audit=True):
             t0=perf_counter();next_theta=active_step(f,t,ev);f.evaluate(next_theta);a.append(perf_counter()-t0)
             t0=perf_counter();face_certificate(f,t,ev);b.append(perf_counter()-t0)
         micro.append(dict(model=s.model,group_index=s.group,newton_seconds=float(np.median(a)),certificate_seconds=float(np.median(b))))
-    return summary,rows,timing,micro
+    return summary,rows,timing,micro,trace
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('--suite',choices=['original','scale','fresh','lexdec'],required=True)
     p.add_argument('--timing-reps',type=int,default=3);p.add_argument('--limit',type=int,default=0)
-    args=p.parse_args();out=ROOT/'results'/'accuracy'/args.suite;out.mkdir(parents=True,exist_ok=True)
+    p.add_argument('--output-root',default='accuracy_v2')
+    args=p.parse_args();out=ROOT/'results'/args.output_root/args.suite;out.mkdir(parents=True,exist_ok=True)
     jobs=[]
     regimes=['balanced','sparse','unbalanced','near_tie','boundary','zero_a','zero_both']
     if args.suite=='original':jobs=[(r,20261025+1000*ri+i,12,10,3) for ri,r in enumerate(regimes) for i in range(20)]
@@ -175,21 +192,23 @@ def main():
     if args.limit:jobs=jobs[:args.limit]
     plan={'suite':args.suite,'jobs':jobs,'timing_repeats':args.timing_reps,'methods':METHODS,
           'selection_atol':1e-10,'selection_rtol':1e-10,'interval_intersection':True,
+          'loss_bound':'directional','unpolished_terminal_hessian':False,
           'fresh_seeds_fixed_before_results':True,'fold_se_scope':'descriptive iid-fold proxy, not a calibrated CV standard error',
           'practical':{'gtol_original':1e-6,'ftol':1e-9,'polish':False},
           'default_lbfgs':{'gtol_scaled':1e-5,'ftol':1e7*np.finfo(float).eps,'polish':False},
           'loose':{'gtol_original':1e-3,'ftol':1e-5,'polish':False}}
     (out/'plan.json').write_text(json.dumps(plan,indent=2))
-    records=[];audits=[];times=[];micros=[]
+    records=[];audits=[];times=[];micros=[];tests=[];decisions=[]
     for index,(regime,seed,na,nb,models) in enumerate(jobs):
         if args.suite=='lexdec':folds,starts,setup,_=make_problem(regime)
         else:folds,starts,setup=problem(regime,seed,na,nb,models)
-        summary,ar,tr,mr=benchmark(folds,starts,setup,seed,args.timing_reps)
+        summary,ar,tr,mr,trace=benchmark(folds,starts,setup,seed,args.timing_reps)
         ident=dict(suite=args.suite,regime=regime,seed=seed)
         summary.update(**ident,n=sum(len(f.test[1]) for f in folds[0]),models=len(folds),groups=len(folds[0]))
         records.append(summary);audits.extend(dict(**ident,**r) for r in ar)
         times.extend(dict(**ident,**r) for r in tr);micros.extend(dict(**ident,**r) for r in mr)
-        for filename,data in [('runs.csv',records),('fold_audit.csv',audits),('timings.csv',times),('microbenchmarks.csv',micros)]:
+        tests.extend(dict(**ident,**r) for r in trace['tests']);decisions.extend(dict(**ident,**r) for r in trace['decisions'])
+        for filename,data in [('runs.csv',records),('fold_audit.csv',audits),('timings.csv',times),('microbenchmarks.csv',micros),('certificate_tests.csv',tests),('scheduler_decisions.csv',decisions)]:
             pd.DataFrame(data).to_csv(out/filename,index=False)
         print(f'{args.suite} {index+1}/{len(jobs)} {regime} agree={summary["adaptive_agrees"]} fallback={summary["numerical_fallbacks"]} speed={summary["strict_speedup_total"]:.2f}/{summary["practical_speedup_total"]:.2f}',flush=True)
     cpu='unknown'

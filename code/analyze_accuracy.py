@@ -7,9 +7,9 @@ from accuracy_io import read_csv
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-ROOT=Path(__file__).resolve().parents[1];BASE=ROOT/'results'/'accuracy';OUT=BASE/'summary'
+ROOT=Path(__file__).resolve().parents[1];BASE=ROOT/'results'/'accuracy_v2';OUT=BASE/'summary'
 OUT.mkdir(exist_ok=True)
-METHODS=['newton','lbfgs','practical','default_lbfgs','loose','certify_once','adaptive','interior_only','frozen','one_step']
+METHODS=['newton','lbfgs','practical','default_lbfgs','loose','certify_once','adaptive','norm_only','interior_only','frozen','one_step']
 R=pd.concat([read_csv(BASE/s/'runs.csv') for s in ['original','scale','fresh','lexdec']],ignore_index=True)
 F=pd.concat([read_csv(BASE/s/'fold_audit.csv') for s in ['original','scale','fresh','lexdec']],ignore_index=True)
 MIC=pd.concat([read_csv(BASE/s/'microbenchmarks.csv').assign(suite=s) for s in ['original','scale','fresh','lexdec']],ignore_index=True)
@@ -102,9 +102,14 @@ fig.savefig(OUT/'Fig5.pdf',bbox_inches='tight');plt.close(fig)
 fig,ax=plt.subplots(1,3,figsize=(9,3.6),layout='constrained')
 fsets=[F[F.suite=='original'],F[F.suite=='scale'],F[(F.suite=='fresh')&(F.regime!='many_levels')],F[(F.suite=='fresh')&(F.regime=='many_levels')],F[F.suite=='lexdec']]
 lab=['Dev.\n240','Scale\n960','Fresh\n240','Fresh\n1440','lexdec\n1659']
-for axis,col,title in zip(ax[:2],['parameter_ratio','loss_ratio'],['A  Parameter enclosure','B  Loss enclosure']):
- vals=[d[col].dropna().to_numpy() for d in fsets];axis.boxplot(vals,showfliers=False,whis=(5,95),widths=.55,patch_artist=True,boxprops={'facecolor':'#CDE4EB'},medianprops={'color':'#174E63'})
- axis.set_xticks(range(1,6),lab,fontsize=10);axis.set_yscale('log' if col=='loss_ratio' else 'linear');axis.axhline(1,color='gray',ls=':');axis.set_ylabel('Bound / observed error');axis.set_title(title,loc='left')
+vals=[d.parameter_ratio.dropna().to_numpy() for d in fsets]
+ax[0].boxplot(vals,showfliers=False,whis=(5,95),widths=.55,patch_artist=True,boxprops={'facecolor':'#CDE4EB'},medianprops={'color':'#174E63'})
+ax[0].set_xticks(range(1,6),lab,fontsize=10);ax[0].axhline(1,color='gray',ls=':');ax[0].set_ylabel('Radius / observed error');ax[0].set_title('A  Parameter enclosure',loc='left')
+for offset,col,color,label in [(-.17,'norm_loss_half_width','#E6C9A4','Norm'),(.17,'loss_half_width','#CDE4EB','Directional')]:
+ vals=[(d.loc[d.loss_ratio.notna(),col]/d.loc[d.loss_ratio.notna(),'loss_error']).to_numpy() for d in fsets]
+ ax[1].boxplot(vals,positions=np.arange(1,6)+offset,showfliers=False,whis=(5,95),widths=.28,patch_artist=True,boxprops={'facecolor':color},medianprops={'color':'#174E63'})
+ ax[1].plot([],[],lw=6,color=color,label=label)
+ax[1].set_xticks(range(1,6),lab,fontsize=10);ax[1].set_yscale('log');ax[1].axhline(1,color='gray',ls=':');ax[1].set_ylabel('Half-width / observed error');ax[1].set_title('B  Paired loss bounds',loc='left');fig.legend(*ax[1].get_legend_handles_labels(),loc='outside lower center',ncol=2,fontsize=9)
 for active,color in [(1,colors[0]),(2,colors[2])]:
  z=np.sort(F[F.active_count==active].active_margin_fraction.dropna());ax[2].plot(z,np.arange(1,len(z)+1)/len(z),label=f'{active} active variance'+('s' if active>1 else ''),color=color)
 ax[2].set(xlabel='Active lower bound / derivative',ylabel='Empirical cumulative fraction',xlim=(0,1));ax[2].set_title('C  Boundary margins',loc='left');ax[2].legend(fontsize=10)
@@ -114,7 +119,7 @@ fig,ax=plt.subplots(1,3,figsize=(9,3.6),layout='constrained')
 for j,regime in enumerate(['new_subject','new_word']):
  d=R[(R.suite=='lexdec')&(R.regime==regime)].iloc[0];methods=['newton','practical','default_lbfgs','certify_once','adaptive'];yy=np.arange(len(methods));kern=[d[m+'_seconds'] for m in methods]
  ax[j].barh(yy,[d.common_seconds]*len(methods),color='#BFCBD2',label='Shared setup');ax[j].barh(yy,kern,left=d.common_seconds,color=colors[0],label='Fit and score');ax[j].set_yticks(yy,['Strict Newton','Practical','Default tol.','Certify once','Adaptive'],fontsize=10);ax[j].invert_yaxis();ax[j].set_xlabel('Seconds');ax[j].set_title(['A  New participant','B  New word'][j],loc='left')
-ax[0].legend(fontsize=9,loc='lower right')
+fig.legend(*ax[0].get_legend_handles_labels(),loc='outside lower center',ncol=2,fontsize=9)
 for j,regime in enumerate(['new_subject','new_word']):
  d=F[(F.suite=='lexdec')&(F.regime==regime)];z=d.pivot(index='group_index',columns='model',values='reference_loss');delta=z[1]-z[2]
  ax[2].scatter(np.full(len(delta),j)+np.linspace(-.12,.12,len(delta)),delta,s=10,alpha=.65,color=colors[j]);ax[2].scatter([j],[delta.mean()],marker='D',s=40,color='black')
