@@ -1,0 +1,46 @@
+{
+  "winner": 1,
+  "updates": [
+    {
+      "model": 1,
+      "group_index": 10,
+      "valid": true,
+      "reason": "active_face"
+    }
+  ],
+  "lower": [
+    1.2759025610238417,
+    1.0214230331454843,
+    1.0351243151590177
+  ],
+  "upper": [
+    1.2759026857781146,
+    1.0214234570556726,
+    1.0351249321230525
+  ],
+  "separation": 0.013700858103345093,
+  "guard": 2.0351243151590176e-10,
+  "suite": "original",
+  "regime": "zero_both",
+  "seed": 20267031,
+  "initial_valid_fits": 35,
+  "total_fits": 36,
+  "initial_failures": [
+    {
+      "model": 1,
+      "group_index": 10,
+      "reason": "active_gradient_not_separated"
+    }
+  ],
+  "completion_seconds": [
+    0.0009509789997537155,
+    0.0008987600012915209,
+    0.0008022260008146986,
+    0.0009805629997572396,
+    0.0009801429987419397,
+    0.0008003319999261294,
+    0.0007074120003380813
+  ],
+  "median_completion_seconds": 0.0008987600012915209,
+  "scope": "incremental completion from cached practical terminal evaluations; excludes prior fits and setup"
+}

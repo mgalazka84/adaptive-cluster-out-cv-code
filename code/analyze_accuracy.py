@@ -88,8 +88,13 @@ fig,ax=plt.subplots(1,3,figsize=(9,3.6),layout='constrained')
 labels=['Dev.\n(n≈240)','Scale\n(n=960)','Fresh\n(n=240)','Fresh\n(n=1440)']
 sets=[R[R.suite=='original'],R[R.suite=='scale'],R[(R.suite=='fresh')&(R.regime!='many_levels')],R[(R.suite=='fresh')&(R.regime=='many_levels')]]
 for j,col in enumerate(['strict_speedup_total','practical_speedup_total','default_speedup_total']):
- ax[0].plot(range(4),[d[col].median() for d in sets],marker='o',label=['Strict refit','Practical refit','Default tolerances'][j],color=colors[j])
-ax[0].axhline(1,color='gray',ls=':');ax[0].set_xticks(range(4),labels,fontsize=9);ax[0].set_ylabel('Refit / adaptive total time');ax[0].set_title('A  Refit tolerance',loc='left');ax[0].legend(fontsize=9)
+ med=np.array([d[col].median() for d in sets])
+ setting=[d.groupby('regime')[col].median() for d in sets]
+ lower=np.array([min(z.min(),v) for z,v in zip(setting,med)])
+ upper=np.array([max(z.max(),v) for z,v in zip(setting,med)])
+ ax[0].errorbar(np.arange(4)+(j-1)*.065,med,yerr=np.array([med-lower,upper-med]),capsize=3,marker='o',label=['Strict refit','Practical refit','Default tolerances'][j],color=colors[j])
+ax[0].axhline(1,color='gray',ls=':');ax[0].set_xticks(range(4),labels,fontsize=9);ax[0].set_ylabel('Refit / adaptive total time');ax[0].set_title('A  Refit tolerance',loc='left');ax[0].set_ylim(.90,1.46)
+fig.legend(*ax[0].get_legend_handles_labels(),loc='outside lower center',ncol=3,fontsize=9)
 for j,r in enumerate(['boundary','zero_a','zero_both']):
  d=R[(R.suite=='original')&(R.regime==r)]
  ax[1].plot([0,1],[d.interior_only_speedup_total.median(),d.strict_speedup_total.median()],marker='o',color=colors[j],label=['Near-zero A','Zero A','Zero A and B'][j])

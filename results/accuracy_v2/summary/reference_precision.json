@@ -1,0 +1,24 @@
+{
+  "suite": "original",
+  "regime": "boundary",
+  "seed": 20265037,
+  "model": 2,
+  "group_index": 2,
+  "digits": 80,
+  "rho": 3.046409438945405e-09,
+  "binary64_reference_distance": 3.046410183662903e-09,
+  "binary64_radius_gap": 7.447174978750908e-16,
+  "reference_error_first_newton_estimate": 1.0480677838158175e-15,
+  "reference_to_high_precision_root": 1.0480677838158177e-15,
+  "center_to_high_precision_root": 3.0464093588914527e-09,
+  "high_precision_root_inside_rho": true,
+  "free_gradient_max": 4.216879177292209e-80,
+  "active_gradient_min": 0.028650664109164017,
+  "newton_correction_norms": [
+    1.837371033899878e-16,
+    9.731049470144946e-32,
+    3.599925575149597e-62,
+    1.0939671516990276e-81
+  ],
+  "scope": "fixed binary64 compressed arrays and whitening transform; no directed rounding"
+}

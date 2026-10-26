@@ -1,0 +1,16 @@
+{
+  "comparisons": 231,
+  "practical_faster": 99,
+  "default_faster": 99,
+  "different_faster_indicators": 36,
+  "practical_total_ratio_within_five_percent": 90,
+  "default_total_ratio_within_five_percent": 92,
+  "adaptive_repetition_relative_range_median": 0.15721963803609532,
+  "adaptive_repetition_relative_range_p95": 0.5436263174496603,
+  "practical_repetition_relative_range_median": 0.16834029403148992,
+  "practical_repetition_relative_range_p95": 0.43675096660845825,
+  "default_lbfgs_repetition_relative_range_median": 0.16006505926196068,
+  "default_lbfgs_repetition_relative_range_p95": 0.486162089867024,
+  "certify_once_repetition_relative_range_median": 0.12131908445150551,
+  "certify_once_repetition_relative_range_p95": 0.4237925129871889
+}
