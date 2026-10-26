@@ -6,13 +6,14 @@ import numpy as np
 from scipy.optimize import minimize
 from acv import simulate, make_fold, CompressedFold
 from boundary_acv import (fit_box, face_certificate, active_step,
-                          active_gradient_lower, adaptive)
+                          active_gradient_lower, adaptive, boundary_tube)
 
 
 def main():
     rng = np.random.default_rng(5701)
     counts = {'face_enclosures': 0, 'double_active': 0, 'gradient_ball_checks': 0,
-              'loss_ball_checks': 0, 'dense_compressed': 0, 'wrong_faces_rejected': 0}
+              'loss_ball_checks': 0, 'dense_compressed': 0, 'wrong_faces_rejected': 0,
+              'full_neighbourhood_checks': 0}
     max_compression = 0.
     max_kkt_violation = 0.
     for seed in range(30):
@@ -47,6 +48,15 @@ def main():
             np.max(np.abs(ev.hessian-ed.hessian)),
             np.max(np.abs(f.prediction(center, ev)[0]-fd.prediction(center, ed)[0])))
         counts['dense_compressed'] += 1
+        tube=boundary_tube(ev,c)
+        assert tube and tube['active_epsilon']>0 and tube['free_radius']>c['radius']
+        for _ in range(20):
+            u=rng.normal(size=len(free));u*=tube['free_radius']/np.linalg.norm(u)
+            t=center+c['S']@u
+            t[active]=rng.uniform(0,tube['active_epsilon'],size=len(active))
+            ef=f.evaluate(t)
+            assert min(ef.gradient[active])>=tube['minimum_derivative']-1e-8
+            counts['full_neighbourhood_checks']+=1
         for _ in range(20):
             u = rng.normal(size=len(free)); u *= c['radius']/np.linalg.norm(u)
             t = center+c['S']@u

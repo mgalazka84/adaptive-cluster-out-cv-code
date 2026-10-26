@@ -48,11 +48,13 @@ def active_step(fold, theta, ev=None):
     return theta.copy()
 
 
-def fit_box(fold, start, gtol=1e-9, method='lbfgs'):
+def fit_box(fold, start, gtol=1e-9, method='lbfgs', ftol=1e-14, polish=True):
     """Numerical reference with exact nonnegative random-effect variances."""
     before = fold.evaluations
     theta = np.maximum(np.asarray(start, float), LOWER)
     optimizer_success = True
+    newton_iterations = 0
+    lbfgs_iterations = 0
     used_lbfgs = method == 'lbfgs'
     if method == 'newton':
         for _ in range(60):
@@ -63,6 +65,7 @@ def fit_box(fold, start, gtol=1e-9, method='lbfgs'):
             if np.max(np.abs(proposal-theta)) < 1e-15:
                 break
             theta = proposal
+            newton_iterations += 1
         ev = fold.evaluate(theta)
         used_lbfgs = np.linalg.norm(projected_gradient(theta, ev.gradient), np.inf) >= gtol
     if used_lbfgs:
@@ -73,12 +76,13 @@ def fit_box(fold, start, gtol=1e-9, method='lbfgs'):
             return value, gradient*scale
         opt = minimize(fun, theta/scale, jac=True, method='L-BFGS-B',
                        bounds=[(x/scale, None) for x in LOWER],
-                       options={'ftol': 1e-14, 'gtol': gtol*scale,
+                       options={'ftol': ftol, 'gtol': gtol*scale,
                                 'maxiter': 500, 'maxls': 40})
         theta = np.maximum(opt.x*scale, LOWER)
         optimizer_success = bool(opt.success)
+        lbfgs_iterations = int(opt.nit)
     # Polish free coordinates even when a random variance is zero.
-    for _ in range(12):
+    for _ in range(12 if polish else 0):
         ev = fold.evaluate(theta)
         if np.linalg.norm(projected_gradient(theta, ev.gradient), np.inf) < gtol:
             break
@@ -86,9 +90,12 @@ def fit_box(fold, start, gtol=1e-9, method='lbfgs'):
         if np.max(np.abs(proposal-theta)) < 1e-15:
             break
         theta = proposal
+        newton_iterations += 1
     ev = fold.evaluate(theta)
     return theta, ev, {
         'n_eval': fold.evaluations-before,
+        'iterations': newton_iterations+lbfgs_iterations,
+        'newton_iterations': newton_iterations, 'lbfgs_iterations': lbfgs_iterations,
         'projected_gradient': float(np.linalg.norm(projected_gradient(theta, ev.gradient), np.inf)),
         'optimizer_success': optimizer_success, 'used_lbfgs': used_lbfgs,
         'active': np.flatnonzero(theta == 0).tolist(),
@@ -167,10 +174,50 @@ def face_certificate(fold, theta, ev=None, allow_boundary=True):
     return {'valid': True, 'reason': 'active_face' if len(active) else 'interior',
             'lo': float(max(0., residual-radius)**2/ns),
             'hi': float((residual+radius)**2/ns), 'mse': float(residual**2/ns),
+            'raw_lo': float(max(0., residual-radius)**2/ns),
+            'raw_hi': float((residual+radius)**2/ns),
             'eta': eta, 'radius': float(rho), 'outer_radius': float(r),
             'Lr': float(L*r), 'a': a, 'prediction_radius': float(radius),
+            'f2': f2, 'b0': float(b0), 'b_r': float(b), 'c': c, 'c0': float(c0),
+            'trace_L': float(f2*a/(1-a*r)**3),
+            'quadratic_L': float(3*b*b*a/(1-a*r)**2),
             'active': active, 'free': free, 'active_lower': lower,
             'S': S, 'theta': theta.copy()}
+
+
+def boundary_tube(ev, cert):
+    """Explicit relative neighbourhood with no other KKT point.
+
+    Free coordinates satisfy ||u|| <= R; each original active variance is
+    between zero and epsilon. Computed after validation, not in the scheduler.
+    The proof uses the same two derivative bounds for a general symmetric
+    covariance perturbation, not only for perturbations within the face.
+    """
+    active = cert.get('active', [])
+    if not cert.get('valid') or not len(active):
+        return None
+    t0 = cert['a']*cert['radius']
+    lo, hi = t0, 1.-1e-10
+    for _ in range(60):
+        mid = (lo+hi)/2
+        if min(active_gradient_lower(ev, j, mid) for j in active) > 0:
+            lo = mid
+        else:
+            hi = mid
+    tdag = (t0+lo)/2
+    slack = tdag-t0
+    if slack <= 0:
+        return None
+    R = cert['radius']+min((cert['outer_radius']-cert['radius'])/2,
+                           slack/(2*max(cert['a'], 1e-300)))
+    beta_sum = 0.
+    for j in active:
+        extra = 0. if ev.extra_b is None or ev.extra_dim == 0 else ev.extra_b[j]
+        beta_sum += max(eigh(ev.b[j], eigvals_only=True, check_finite=False)[-1], extra)
+    epsilon = (tdag-cert['a']*R)/beta_sum
+    return {'free_radius': float(R), 'active_epsilon': float(epsilon),
+            'perturbation_radius': float(tdag),
+            'minimum_derivative': float(min(active_gradient_lower(ev,j,tdag) for j in active))}
 
 
 def same_root(old, new):
@@ -196,6 +243,8 @@ class State:
     ev: object = None
     cert: object = None
     fallback_reason: str = ''
+    fallback_iterations: int = 0
+    anchor: object = None
 
     def refine(self):
         if self.numerical:
@@ -205,7 +254,8 @@ class State:
         if self.steps >= 7:
             self.complete('refinement_budget')
             return
-        old = self.cert if self.cert and self.cert.get('valid') else None
+        # Retain the last valid enclosure across unsuccessful intermediate tests.
+        old = self.anchor
         self.theta = active_step(self.fold, self.theta, self.ev)
         self.steps += 1
         self.ev = self.fold.evaluate(self.theta)
@@ -214,11 +264,21 @@ class State:
         if old and self.cert['valid'] and not same_root(old, self.cert):
             self.complete('root_anchor')
             return
+        if old and self.cert['valid']:
+            lo = max(old['lo'], self.cert['lo'])
+            hi = min(old['hi'], self.cert['hi'])
+            if lo > hi:
+                self.complete('empty_interval_intersection')
+                return
+            self.cert['lo'], self.cert['hi'] = lo, hi
+        if self.cert['valid']:
+            self.anchor = self.cert
         if not self.cert['valid'] and self.steps >= 4:
             self.complete(self.cert['reason'])
 
     def complete(self, reason):
-        self.theta, self.ev, _ = fit_box(self.fold, self.theta, method='newton')
+        self.theta, self.ev, meta = fit_box(self.fold, self.theta, method='newton')
+        self.fallback_iterations += meta['iterations']
         loss = float(np.mean((self.fold.test[1]-self.fold.prediction(self.theta, self.ev)[0])**2))
         self.cert = {'valid': False, 'reason': 'numerical_refit', 'lo': loss, 'hi': loss, 'mse': loss}
         self.numerical = True

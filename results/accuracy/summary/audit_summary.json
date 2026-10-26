@@ -1,0 +1,32 @@
+{
+  "runs": 231,
+  "folds": 12948,
+  "selection_failures": 0,
+  "containment_failures": 0,
+  "root_mismatches": 0,
+  "training_start_selection_failures": 0,
+  "training_start_active_mismatches": 0,
+  "max_projected_gradient": 9.980674064991035e-10,
+  "max_strict_loss_discrepancy": 4.949685106225843e-11,
+  "min_contraction_margin": 6.98900495902377e-05,
+  "parameter_ratio_quantiles": {
+    "0.05": 1.0006429228576312,
+    "0.5": 1.016917550241329,
+    "0.95": 1.3300591095900942
+  },
+  "loss_ratio_quantiles": {
+    "0.05": 3.188536691320854,
+    "0.5": 41.22501393772415,
+    "0.95": 1229.786792541023
+  },
+  "parameter_censored": 0,
+  "loss_censored": 574,
+  "active_fraction_quantiles": {
+    "0.0": 0.0059411447195859,
+    "0.05": 0.28493733012629624,
+    "0.5": 0.9252611807663558,
+    "0.95": 0.9987472060552497
+  },
+  "external_all_inside": true,
+  "external_max_loss_error": 2.8107294269830163e-11
+}
