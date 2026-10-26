@@ -81,43 +81,43 @@ checks=dict(runs=len(R),folds=len(F),selection_failures=int((~R.adaptive_agrees)
 (OUT/'audit_summary.json').write_text(json.dumps(checks,indent=2))
 MIC['certificate_step_ratio']=MIC.certificate_seconds/MIC.newton_seconds
 MIC.groupby('suite')[['newton_seconds','certificate_seconds','certificate_step_ratio']].median().to_csv(OUT/'micro_summary.csv')
-plt.rcParams.update({'font.size':9,'axes.spines.top':False,'axes.spines.right':False,'pdf.fonttype':42,'axes.titleweight':'bold'})
+plt.rcParams.update({'font.size':11,'axes.spines.top':False,'axes.spines.right':False,'pdf.fonttype':42,'axes.titleweight':'bold'})
 colors=['#176B87','#7E57A0','#D88327','#37846C']
 # Figure 5: cost and accuracy, no structurally forced fallback histogram.
-fig,ax=plt.subplots(1,3,figsize=(10,3.2),layout='constrained')
-labels=['Development\n(n≈240)','Scale\n(n=960)','Fresh\n(n=240)','Fresh\n(n=1440)']
+fig,ax=plt.subplots(1,3,figsize=(9,3.6),layout='constrained')
+labels=['Dev.\n(n≈240)','Scale\n(n=960)','Fresh\n(n=240)','Fresh\n(n=1440)']
 sets=[R[R.suite=='original'],R[R.suite=='scale'],R[(R.suite=='fresh')&(R.regime!='many_levels')],R[(R.suite=='fresh')&(R.regime=='many_levels')]]
 for j,col in enumerate(['strict_speedup_total','practical_speedup_total','default_speedup_total']):
  ax[0].plot(range(4),[d[col].median() for d in sets],marker='o',label=['Strict refit','Practical refit','Default tolerances'][j],color=colors[j])
-ax[0].axhline(1,color='gray',ls=':');ax[0].set_xticks(range(4),labels,fontsize=7);ax[0].set_ylabel('Refit / adaptive total time');ax[0].set_title('A  Baseline choice matters',loc='left');ax[0].legend(fontsize=7)
+ax[0].axhline(1,color='gray',ls=':');ax[0].set_xticks(range(4),labels,fontsize=9);ax[0].set_ylabel('Refit / adaptive total time');ax[0].set_title('A  Refit tolerance',loc='left');ax[0].legend(fontsize=9)
 for j,r in enumerate(['boundary','zero_a','zero_both']):
  d=R[(R.suite=='original')&(R.regime==r)]
  ax[1].plot([0,1],[d.interior_only_speedup_total.median(),d.strict_speedup_total.median()],marker='o',color=colors[j],label=['Near-zero A','Zero A','Zero A and B'][j])
-ax[1].axhline(1,color='gray',ls=':');ax[1].set_xticks([0,1],['Interior test','With face test']);ax[1].set_ylabel('Strict refit / total time');ax[1].set_title('B  Boundary-test ablation',loc='left');ax[1].legend(fontsize=7)
+ax[1].axhline(1,color='gray',ls=':');ax[1].set_xticks([0,1],['Interior test','With face test']);ax[1].set_ylabel('Strict refit / total time');ax[1].set_title('B  Boundary ablation',loc='left');ax[1].legend(fontsize=9)
 for j,d in enumerate(sets):
  ax[2].scatter(d.paired_fold_se_proxy,d.cv_gap,s=12,alpha=.65,label=labels[j].replace('\n',' '),color=colors[j])
-lims=[1e-5,1];ax[2].plot(lims,lims,ls=':',color='gray');ax[2].set(xscale='log',yscale='log',xlabel='Paired fold SE proxy',ylabel='Top-two reference CV gap');ax[2].set_title('C  Decision and variation scales',loc='left');ax[2].legend(fontsize=6)
-fig.savefig(OUT/'Fig5.pdf');plt.close(fig)
+lims=[1e-5,1];ax[2].plot(lims,lims,ls=':',color='gray');ax[2].set(xscale='log',yscale='log',xlabel='Paired fold SE proxy',ylabel='Top-two reference CV gap');ax[2].set_title('C  Gap and fold variation',loc='left');ax[2].legend(fontsize=9,loc='upper left')
+fig.savefig(OUT/'Fig5.pdf',bbox_inches='tight');plt.close(fig)
 # Figure 6: quantitative conservatism, censored ratios omitted explicitly in caption.
-fig,ax=plt.subplots(1,3,figsize=(10,3.3),layout='constrained')
+fig,ax=plt.subplots(1,3,figsize=(9,3.6),layout='constrained')
 fsets=[F[F.suite=='original'],F[F.suite=='scale'],F[(F.suite=='fresh')&(F.regime!='many_levels')],F[(F.suite=='fresh')&(F.regime=='many_levels')],F[F.suite=='lexdec']]
 lab=['Dev.\n240','Scale\n960','Fresh\n240','Fresh\n1440','lexdec\n1659']
 for axis,col,title in zip(ax[:2],['parameter_ratio','loss_ratio'],['A  Parameter enclosure','B  Loss enclosure']):
  vals=[d[col].dropna().to_numpy() for d in fsets];axis.boxplot(vals,showfliers=False,whis=(5,95),widths=.55,patch_artist=True,boxprops={'facecolor':'#CDE4EB'},medianprops={'color':'#174E63'})
- axis.set_xticks(range(1,6),lab,fontsize=8);axis.set_yscale('log');axis.axhline(1,color='gray',ls=':');axis.set_ylabel('Bound / observed error');axis.set_title(title,loc='left')
+ axis.set_xticks(range(1,6),lab,fontsize=10);axis.set_yscale('log' if col=='loss_ratio' else 'linear');axis.axhline(1,color='gray',ls=':');axis.set_ylabel('Bound / observed error');axis.set_title(title,loc='left')
 for active,color in [(1,colors[0]),(2,colors[2])]:
  z=np.sort(F[F.active_count==active].active_margin_fraction.dropna());ax[2].plot(z,np.arange(1,len(z)+1)/len(z),label=f'{active} active variance'+('s' if active>1 else ''),color=color)
-ax[2].set(xlabel='Smallest active lower bound / derivative',ylabel='Empirical cumulative fraction',xlim=(0,1));ax[2].set_title('C  Boundary margins',loc='left');ax[2].legend(fontsize=8)
-fig.savefig(OUT/'Fig6.pdf');plt.close(fig)
+ax[2].set(xlabel='Active lower bound / derivative',ylabel='Empirical cumulative fraction',xlim=(0,1));ax[2].set_title('C  Boundary margins',loc='left');ax[2].legend(fontsize=10)
+fig.savefig(OUT/'Fig6.pdf',bbox_inches='tight');plt.close(fig)
 # Figure 7: real-data runtime and paired differences.
-fig,ax=plt.subplots(1,3,figsize=(10,3.1),layout='constrained')
+fig,ax=plt.subplots(1,3,figsize=(9,3.6),layout='constrained')
 for j,regime in enumerate(['new_subject','new_word']):
  d=R[(R.suite=='lexdec')&(R.regime==regime)].iloc[0];methods=['newton','practical','default_lbfgs','certify_once','adaptive'];yy=np.arange(len(methods));kern=[d[m+'_seconds'] for m in methods]
- ax[j].barh(yy,[d.common_seconds]*len(methods),color='#BFCBD2',label='Shared setup');ax[j].barh(yy,kern,left=d.common_seconds,color=colors[0],label='Fit and score');ax[j].set_yticks(yy,['Strict Newton','Practical','Default tol.','Certify once','Adaptive'],fontsize=8);ax[j].invert_yaxis();ax[j].set_xlabel('Seconds');ax[j].set_title(['A  New participant','B  New word'][j],loc='left')
-ax[0].legend(fontsize=7,loc='lower right')
+ ax[j].barh(yy,[d.common_seconds]*len(methods),color='#BFCBD2',label='Shared setup');ax[j].barh(yy,kern,left=d.common_seconds,color=colors[0],label='Fit and score');ax[j].set_yticks(yy,['Strict Newton','Practical','Default tol.','Certify once','Adaptive'],fontsize=10);ax[j].invert_yaxis();ax[j].set_xlabel('Seconds');ax[j].set_title(['A  New participant','B  New word'][j],loc='left')
+ax[0].legend(fontsize=9,loc='lower right')
 for j,regime in enumerate(['new_subject','new_word']):
  d=F[(F.suite=='lexdec')&(F.regime==regime)];z=d.pivot(index='group_index',columns='model',values='reference_loss');delta=z[1]-z[2]
  ax[2].scatter(np.full(len(delta),j)+np.linspace(-.12,.12,len(delta)),delta,s=10,alpha=.65,color=colors[j]);ax[2].scatter([j],[delta.mean()],marker='D',s=40,color='black')
-ax[2].axhline(0,color='gray',ls=':');ax[2].set_xticks([0,1],['Participant','Word']);ax[2].set_ylabel('Fold loss difference: M2 − M3');ax[2].set_title('C  Fold variation exceeds the gap',loc='left')
-fig.savefig(OUT/'Fig7.pdf');plt.close(fig)
+ax[2].axhline(0,color='gray',ls=':');ax[2].set_xticks([0,1],['Participant','Word']);ax[2].set_ylabel('Fold loss difference: M2 − M3');ax[2].set_title('C  Paired differences',loc='left')
+fig.savefig(OUT/'Fig7.pdf',bbox_inches='tight');plt.close(fig)
 print(json.dumps(checks,indent=2))
