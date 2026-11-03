@@ -123,7 +123,7 @@ fig.savefig(OUT/'Fig6.pdf',bbox_inches='tight');plt.close(fig)
 fig,ax=plt.subplots(1,3,figsize=(9,3.6),layout='constrained')
 for j,regime in enumerate(['new_subject','new_word']):
  d=R[(R.suite=='lexdec')&(R.regime==regime)].iloc[0];methods=['newton','practical','default_lbfgs','certify_once','adaptive'];yy=np.arange(len(methods));kern=[d[m+'_seconds'] for m in methods]
- ax[j].barh(yy,[d.common_seconds]*len(methods),color='#BFCBD2',label='Shared setup');ax[j].barh(yy,kern,left=d.common_seconds,color=colors[0],label='Fit and score');ax[j].set_yticks(yy,['Strict Newton','Practical','Default tol.','Certify once','Adaptive'],fontsize=10);ax[j].invert_yaxis();ax[j].set_xlabel('Seconds');ax[j].set_title(['A  New participant','B  New word'][j],loc='left')
+ ax[j].barh(yy,[d.common_seconds]*len(methods),color='#BFCBD2',label='Shared setup');ax[j].barh(yy,kern,left=d.common_seconds,color=colors[0],label='Fit and score');ax[j].set_yticks(yy,['Strict Newton','Practical','Default tol.','Bound-once','Adaptive'],fontsize=10);ax[j].invert_yaxis();ax[j].set_xlabel('Seconds');ax[j].set_title(['A  New participant','B  New word'][j],loc='left')
 fig.legend(*ax[0].get_legend_handles_labels(),loc='outside lower center',ncol=2,fontsize=9)
 for j,regime in enumerate(['new_subject','new_word']):
  d=F[(F.suite=='lexdec')&(F.regime==regime)];z=d.pivot(index='group_index',columns='model',values='reference_loss');delta=z[1]-z[2]
