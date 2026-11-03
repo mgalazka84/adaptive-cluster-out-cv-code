@@ -12,38 +12,48 @@ from scipy.optimize import minimize
 from acv import CompressedFold, Evaluation
 from scipy.linalg import cholesky
 
-LOWER = np.array([1e-10, 0., 0.])
+LOWER = np.array([1e-10, 0., 0.])  # compatibility with archived three-component code
+
+def lower_bounds(theta):
+    return np.r_[1e-10, np.zeros(len(theta)-1)]
+
+def training_start(fold):
+    """Uses training responses only; no held-out values or full-data fit."""
+    d = len(fold.C)
+    scale = max(float(np.var(fold.y)), 1e-5)
+    return scale*np.ones(1) if d == 1 else scale*np.r_[.5, np.full(d-1, .5/(d-1))]
 
 
 def projected_gradient(theta, gradient):
     pg = gradient.copy()
-    pg[(theta <= LOWER) & (pg > 0)] = 0.
+    pg[(theta <= lower_bounds(theta)) & (pg > 0)] = 0.
     return pg
 
 
-def active_step(fold, theta, ev=None):
+def active_step(fold, theta, ev=None, eigen_abs=.01, eigen_rel=1e-5, armijo=1e-4):
+    lower = lower_bounds(theta)
     """Projected, damped Newton step; can both enter and leave a zero face."""
     if ev is None:
         ev = fold.evaluate(theta)
-    fixed = (theta <= LOWER) & (ev.gradient >= 0)
+    fixed = (theta <= lower_bounds(theta)) & (ev.gradient >= 0)
     free = np.flatnonzero(~fixed)
     if len(free) == 0:
         return theta.copy()
     H = ev.hessian[np.ix_(free, free)]
     lam, U = eigh(H, check_finite=False)
-    lam = np.maximum(lam, max(.01, np.max(np.abs(lam))*1e-5))
-    d = np.zeros(3)
+    lam = np.maximum(lam, max(eigen_abs, np.max(np.abs(lam))*eigen_rel))
+    d = np.zeros(len(theta))
     d[free] = -(U/lam) @ (U.T @ ev.gradient[free])
-    displacement = np.maximum(theta+d, LOWER)-theta
+    displacement = np.maximum(theta+d, lower)-theta
     if ev.gradient @ displacement >= 0:
         d = -ev.gradient/np.maximum(np.abs(np.diag(ev.hessian)), .01)
         d[fixed] = 0
     rate = 1.
     for _ in range(40):
-        proposal = np.maximum(theta+rate*d, LOWER)
+        proposal = np.maximum(theta+rate*d, lower)
         delta = proposal-theta
         slope = float(ev.gradient @ delta)
-        if slope <= 0 and fold.objective(proposal) <= ev.value+1e-4*slope+1e-12:
+        if slope <= 0 and fold.objective(proposal) <= ev.value+armijo*slope+1e-12:
             return proposal
         rate *= .5
     return theta.copy()
@@ -53,7 +63,8 @@ def fit_box(fold, start, gtol=1e-9, method='lbfgs', ftol=1e-14, polish=True,
             terminal_hessian=True):
     """Numerical reference with exact nonnegative random-effect variances."""
     before = fold.evaluations
-    theta = np.maximum(np.asarray(start, float), LOWER)
+    lower = lower_bounds(start)
+    theta = np.maximum(np.asarray(start, float), lower)
     optimizer_success = True
     newton_iterations = 0
     lbfgs_iterations = 0
@@ -77,10 +88,10 @@ def fit_box(fold, start, gtol=1e-9, method='lbfgs', ftol=1e-14, polish=True,
             value, gradient = fold.value_gradient(z*scale)
             return value, gradient*scale
         opt = minimize(fun, theta/scale, jac=True, method='L-BFGS-B',
-                       bounds=[(x/scale, None) for x in LOWER],
+                       bounds=[(x/scale, None) for x in lower],
                        options={'ftol': ftol, 'gtol': gtol*scale,
                                 'maxiter': 500, 'maxls': 40})
-        theta = np.maximum(opt.x*scale, LOWER)
+        theta = np.maximum(opt.x*scale, lower)
         optimizer_success = bool(opt.success)
         lbfgs_iterations = int(opt.nit)
     # Polish free coordinates even when a random variance is zero.
@@ -112,7 +123,7 @@ def fit_box(fold, start, gtol=1e-9, method='lbfgs', ftol=1e-14, polish=True,
         'residual_guard': bool(theta[0] <= LOWER[0])}
 
 
-def active_gradient_lower(ev, index, t):
+def active_gradient_lower(ev, index, t, return_branches=False):
     """PSD directional derivative lower bound throughout ||u|| <= rho.
 
 Here t = a*rho < 1. B_index is positive semidefinite by construction. The
@@ -132,10 +143,11 @@ compressed scalar block is included in trace, quadratic, and vector norms.
     bwnorm = np.sqrt(Bw@Bw+extra*extra*ev.extra_w2)
     bound2 = ev.gradient[index]-.5*(delta*trace+2*bwnorm*delta*wnorm+
                                    beta*delta*delta*wnorm*wnorm)
-    return float(max(bound1, bound2))
+    return (float(bound1), float(bound2)) if return_branches else float(max(bound1, bound2))
 
 
-def face_certificate(fold, theta, ev=None, allow_boundary=True, loss_bound='directional'):
+def face_certificate(fold, theta, ev=None, allow_boundary=True, loss_bound='directional',
+                     curvature_floor=1e-10, radius_factor=2.):
     if ev is None:
         ev = fold.evaluate(theta)
     if theta[0] <= 0 or np.any(theta[1:] < 0):
@@ -145,12 +157,14 @@ def face_certificate(fold, theta, ev=None, allow_boundary=True, loss_bound='dire
         return {'valid': False, 'reason': 'boundary_disabled'}
     free = np.flatnonzero(theta > 0)
     lam, U = eigh(ev.hessian[np.ix_(free, free)], check_finite=False)
-    if lam[0] <= 1e-10:
+    if lam[0] <= curvature_floor:
         return {'valid': False, 'reason': 'nonpositive_face_curvature'}
-    S = np.zeros((3, len(free)))
+    S = np.zeros((len(theta), len(free)))
     S[free] = (U/np.sqrt(lam))@U.T
     eta = float(np.linalg.norm(S.T@ev.gradient))
-    r = max(2*eta, 1e-12)
+    if radius_factor < 1 or not np.isfinite(radius_factor):
+        raise ValueError('radius_factor must be finite and at least one')
+    r = max(radius_factor*eta, 1e-12)
     if np.any(theta[free]-r*np.linalg.norm(S[free], axis=1) <= 0):
         return {'valid': False, 'reason': 'free_variance_boundary', 'eta': eta}
     D = np.einsum('ij,iab->jab', S, ev.b)
@@ -290,28 +304,34 @@ class State:
     anchor: object = None
     loss_bound: str = 'directional'
     trace: object = None
+    initial_budget: int = 4
+    max_steps: int = 7
+    step_options: object = None
+    bound_options: object = None
 
     def refine(self):
         if self.numerical:
             return
         if self.ev is None:
             self.ev = self.fold.evaluate(self.theta)
-        if self.steps >= 7:
+        if self.steps >= self.max_steps:
             self.complete('refinement_budget')
             return
         # Retain the last valid enclosure across unsuccessful intermediate tests.
         old = self.anchor
-        self.theta = active_step(self.fold, self.theta, self.ev)
+        self.theta = active_step(self.fold, self.theta, self.ev, **(self.step_options or {}))
         self.steps += 1
         self.ev = self.fold.evaluate(self.theta)
-        self.cert = face_certificate(self.fold, self.theta, self.ev, self.allow_boundary, self.loss_bound)
+        self.cert = face_certificate(self.fold, self.theta, self.ev, self.allow_boundary, self.loss_bound, **(self.bound_options or {}))
         self.checks += 1
         if self.trace is not None:
             self.trace.append(dict(model=self.model,group_index=self.group,step=self.steps,
                 had_anchor=old is not None,valid=self.cert['valid'],reason=self.cert['reason'],
                 Lr=self.cert.get('Lr',np.nan),eta=self.cert.get('eta',np.nan),
                 outer_radius=self.cert.get('outer_radius',np.nan),
-                self_map=self.cert.get('self_map',np.nan)))
+                self_map=self.cert.get('self_map',np.nan),
+                lo=self.cert.get('lo',np.nan),hi=self.cert.get('hi',np.nan),
+                mse=self.cert.get('mse',np.nan)))
         if old and self.cert['valid'] and not same_root(old, self.cert):
             self.complete('root_anchor')
             return
@@ -324,7 +344,7 @@ class State:
             self.cert['lo'], self.cert['hi'] = lo, hi
         if self.cert['valid']:
             self.anchor = self.cert
-        if not self.cert['valid'] and self.steps >= 4:
+        if not self.cert['valid'] and self.steps >= self.initial_budget:
             self.complete(self.cert['reason'])
 
     def complete(self, reason):
@@ -336,9 +356,10 @@ class State:
         self.fallback_reason = reason
 
 
-def adaptive(folds, starts, allow_boundary=True,
+def adaptive(folds, starts=None, allow_boundary=True,
              selection_atol=1e-10, selection_rtol=1e-10,
-             loss_bound='directional', audit_trace=None):
+             loss_bound='directional', audit_trace=None,
+             initial_budget=None, max_steps=None, step_options=None, bound_options=None):
     """Refine until loss intervals separate beyond a numerical tie tolerance.
 
     The tolerance is a conservative decision guard, not a bound on all
@@ -348,10 +369,17 @@ def adaptive(folds, starts, allow_boundary=True,
     if (not np.isfinite(selection_atol) or not np.isfinite(selection_rtol)
             or selection_atol < 0 or selection_rtol < 0):
         raise ValueError('Selection tolerances must be finite and nonnegative')
+    initial_budget = (12 if starts is None else 4) if initial_budget is None else initial_budget
+    max_steps = (20 if starts is None else 7) if max_steps is None else max_steps
+    if not 1 <= initial_budget <= max_steps:
+        raise ValueError('Require 1 <= initial_budget <= max_steps')
     states = []
     for m, fs in enumerate(folds):
         for k, fold in enumerate(fs):
-            s = State(fold, starts[m].copy(), m, k, allow_boundary,
+            start = training_start(fold) if starts is None else starts[m].copy()
+            s = State(fold, start, m, k, allow_boundary,
+                      initial_budget=initial_budget,max_steps=max_steps,
+                      step_options=step_options,bound_options=bound_options,
                       loss_bound=loss_bound, trace=None if audit_trace is None else audit_trace['tests'])
             while s.cert is None or 'lo' not in s.cert:
                 s.refine()
@@ -380,3 +408,4 @@ def adaptive(folds, starts, allow_boundary=True,
         rounds += 1
         if rounds > 10000:
             raise RuntimeError('Unexpected refinement loop')
+

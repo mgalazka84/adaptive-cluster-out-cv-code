@@ -1,0 +1,5 @@
+{
+  "statsmodels": "0.15.0",
+  "optimizer": "BFGS gtol=1e-10 maxiter=500, default training-only initialization",
+  "scope": "Strict independent software audit, not a claim of speedup over package defaults."
+}

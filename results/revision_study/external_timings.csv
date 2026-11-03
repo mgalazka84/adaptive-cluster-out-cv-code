@@ -1,0 +1,163 @@
+target,group_index,model,repeat,position,method,seconds,loss,converged,local_valid,warnings
+new_subject,0,0,0,0,practical,0.01672317300017312,0.0569537413682628,True,,
+new_subject,0,0,0,1,statsmodels,0.3140206670000225,0.056953750633836585,True,,The MLE may be on the boundary of the parameter space.
+new_subject,0,0,0,2,bound_once,0.017665194999608502,0.0569537413682628,True,True,
+new_subject,0,0,1,0,practical,0.015552517999822157,0.0569537413682628,True,,
+new_subject,0,0,1,1,statsmodels,0.3175407079997967,0.056953750633836585,True,,The MLE may be on the boundary of the parameter space.
+new_subject,0,0,1,2,bound_once,0.017215767999914533,0.0569537413682628,True,True,
+new_subject,0,0,2,0,practical,0.014065925000068091,0.0569537413682628,True,,
+new_subject,0,0,2,1,statsmodels,0.348628682999788,0.056953750633836585,True,,The MLE may be on the boundary of the parameter space.
+new_subject,0,0,2,2,bound_once,0.019647295999675407,0.0569537413682628,True,True,
+new_subject,0,1,0,0,statsmodels,0.3157096649997584,0.04680917598602347,True,,The MLE may be on the boundary of the parameter space.
+new_subject,0,1,0,1,bound_once,0.020226349999575177,0.04680915116213437,True,True,
+new_subject,0,1,0,2,practical,0.018142965999686567,0.04680915116213437,True,,
+new_subject,0,1,1,0,practical,0.016208657999868592,0.04680915116213437,True,,
+new_subject,0,1,1,1,bound_once,0.022052756999983103,0.04680915116213437,True,True,
+new_subject,0,1,1,2,statsmodels,0.35558197999989716,0.04680917598602347,True,,The MLE may be on the boundary of the parameter space.
+new_subject,0,1,2,0,statsmodels,0.3211808529999871,0.04680917598602347,True,,The MLE may be on the boundary of the parameter space.
+new_subject,0,1,2,1,practical,0.015723549000085768,0.04680915116213437,True,,
+new_subject,0,1,2,2,bound_once,0.023993258999780664,0.04680915116213437,True,True,
+new_subject,0,2,0,0,bound_once,0.01889762000018891,0.0462180007544009,True,True,
+new_subject,0,2,0,1,practical,0.017482133000157773,0.0462180007544009,True,,
+new_subject,0,2,0,2,statsmodels,0.43041454500007603,0.04621800179155309,False,,"Maximum Likelihood optimization failed to converge. Check mle_retvals | MixedLM optimization failed, trying a different optimizer may help. | Gradient optimization failed, |grad| = 0.000001 | The MLE may be on the boundary of the parameter space."
+new_subject,0,2,1,0,practical,0.020270201000130328,0.0462180007544009,True,,
+new_subject,0,2,1,1,bound_once,0.02211240099995848,0.0462180007544009,True,True,
+new_subject,0,2,1,2,statsmodels,0.35191184999985126,0.04621800179155309,False,,"Maximum Likelihood optimization failed to converge. Check mle_retvals | MixedLM optimization failed, trying a different optimizer may help. | Gradient optimization failed, |grad| = 0.000001 | The MLE may be on the boundary of the parameter space."
+new_subject,0,2,2,0,statsmodels,0.35471220999988873,0.04621800179155309,False,,"Maximum Likelihood optimization failed to converge. Check mle_retvals | MixedLM optimization failed, trying a different optimizer may help. | Gradient optimization failed, |grad| = 0.000001 | The MLE may be on the boundary of the parameter space."
+new_subject,0,2,2,1,bound_once,0.019203530999675422,0.0462180007544009,True,True,
+new_subject,0,2,2,2,practical,0.016327280000041355,0.0462180007544009,True,,
+new_subject,10,0,0,0,bound_once,0.019655702999898494,0.03043022286872133,True,True,
+new_subject,10,0,0,1,practical,0.01761026599979232,0.03043022286872133,True,,
+new_subject,10,0,0,2,statsmodels,0.7969117190000361,0.03043022287632063,False,,"Maximum Likelihood optimization failed to converge. Check mle_retvals | MixedLM optimization failed, trying a different optimizer may help. | Gradient optimization failed, |grad| = 0.000000 | The MLE may be on the boundary of the parameter space."
+new_subject,10,0,1,0,statsmodels,0.8285146359999089,0.03043022287632063,False,,"Maximum Likelihood optimization failed to converge. Check mle_retvals | MixedLM optimization failed, trying a different optimizer may help. | Gradient optimization failed, |grad| = 0.000000 | The MLE may be on the boundary of the parameter space."
+new_subject,10,0,1,1,bound_once,0.018886872000166477,0.03043022286872133,True,True,
+new_subject,10,0,1,2,practical,0.016406409999945026,0.03043022286872133,True,,
+new_subject,10,0,2,0,statsmodels,0.7506361360001392,0.03043022287632063,False,,"Maximum Likelihood optimization failed to converge. Check mle_retvals | MixedLM optimization failed, trying a different optimizer may help. | Gradient optimization failed, |grad| = 0.000000 | The MLE may be on the boundary of the parameter space."
+new_subject,10,0,2,1,bound_once,0.019283842000277218,0.03043022286872133,True,True,
+new_subject,10,0,2,2,practical,0.016173276999779773,0.03043022286872133,True,,
+new_subject,10,1,0,0,practical,0.01578170599987061,0.031272589089967356,True,,
+new_subject,10,1,0,1,statsmodels,0.3538989139997284,0.03127259009387081,True,,The MLE may be on the boundary of the parameter space.
+new_subject,10,1,0,2,bound_once,0.018426838999857864,0.031272589089967356,True,True,
+new_subject,10,1,1,0,practical,0.015020598999853974,0.031272589089967356,True,,
+new_subject,10,1,1,1,bound_once,0.01743051599987666,0.031272589089967356,True,True,
+new_subject,10,1,1,2,statsmodels,0.36093894799978443,0.03127259009387081,True,,The MLE may be on the boundary of the parameter space.
+new_subject,10,1,2,0,statsmodels,0.36225177899996197,0.03127259009387081,True,,The MLE may be on the boundary of the parameter space.
+new_subject,10,1,2,1,practical,0.015411498000048596,0.031272589089967356,True,,
+new_subject,10,1,2,2,bound_once,0.018626250000124855,0.031272589089967356,True,True,
+new_subject,10,2,0,0,practical,0.015621694999936153,0.03164131065531962,True,,
+new_subject,10,2,0,1,bound_once,0.0185786779998125,0.03164131065531962,True,True,
+new_subject,10,2,0,2,statsmodels,0.31973622699979387,0.03164129325282058,True,,The MLE may be on the boundary of the parameter space.
+new_subject,10,2,1,0,bound_once,0.021013031999700615,0.03164131065531962,True,True,
+new_subject,10,2,1,1,statsmodels,0.316418338999938,0.03164129325282058,True,,The MLE may be on the boundary of the parameter space.
+new_subject,10,2,1,2,practical,0.024919639000017924,0.03164131065531962,True,,
+new_subject,10,2,2,0,practical,0.018877818999953888,0.03164131065531962,True,,
+new_subject,10,2,2,1,statsmodels,0.32336482200025785,0.03164129325282058,True,,The MLE may be on the boundary of the parameter space.
+new_subject,10,2,2,2,bound_once,0.020651226000154566,0.03164131065531962,True,True,
+new_subject,20,0,0,0,practical,0.018302389999917068,0.0837960303720154,True,,
+new_subject,20,0,0,1,bound_once,0.022336289000122633,0.0837960303720154,True,True,
+new_subject,20,0,0,2,statsmodels,1.0553872640002737,0.08379603150287646,False,,"Maximum Likelihood optimization failed to converge. Check mle_retvals | MixedLM optimization failed, trying a different optimizer may help. | Gradient optimization failed, |grad| = 0.000002 | The MLE may be on the boundary of the parameter space."
+new_subject,20,0,1,0,statsmodels,0.9927759619999961,0.08379603150287646,False,,"Maximum Likelihood optimization failed to converge. Check mle_retvals | MixedLM optimization failed, trying a different optimizer may help. | Gradient optimization failed, |grad| = 0.000002 | The MLE may be on the boundary of the parameter space."
+new_subject,20,0,1,1,bound_once,0.01809144299977561,0.0837960303720154,True,True,
+new_subject,20,0,1,2,practical,0.01623938700004146,0.0837960303720154,True,,
+new_subject,20,0,2,0,bound_once,0.01943892600002073,0.0837960303720154,True,True,
+new_subject,20,0,2,1,statsmodels,0.971456273000058,0.08379603150287646,False,,"Maximum Likelihood optimization failed to converge. Check mle_retvals | MixedLM optimization failed, trying a different optimizer may help. | Gradient optimization failed, |grad| = 0.000002 | The MLE may be on the boundary of the parameter space."
+new_subject,20,0,2,2,practical,0.01824563499985743,0.0837960303720154,True,,
+new_subject,20,1,0,0,bound_once,0.018548382000062702,0.05254185113918496,True,True,
+new_subject,20,1,0,1,practical,0.01513980800018544,0.05254185113918496,True,,
+new_subject,20,1,0,2,statsmodels,0.33109590899994146,0.05254186120112099,False,,"Maximum Likelihood optimization failed to converge. Check mle_retvals | MixedLM optimization failed, trying a different optimizer may help. | Gradient optimization failed, |grad| = 0.000001 | The MLE may be on the boundary of the parameter space."
+new_subject,20,1,1,0,practical,0.016107779000321898,0.05254185113918496,True,,
+new_subject,20,1,1,1,bound_once,0.01850924300015322,0.05254185113918496,True,True,
+new_subject,20,1,1,2,statsmodels,0.3419205410000359,0.05254186120112099,False,,"Maximum Likelihood optimization failed to converge. Check mle_retvals | MixedLM optimization failed, trying a different optimizer may help. | Gradient optimization failed, |grad| = 0.000001 | The MLE may be on the boundary of the parameter space."
+new_subject,20,1,2,0,bound_once,0.017981456999677903,0.05254185113918496,True,True,
+new_subject,20,1,2,1,statsmodels,0.32434585800001514,0.05254186120112099,False,,"Maximum Likelihood optimization failed to converge. Check mle_retvals | MixedLM optimization failed, trying a different optimizer may help. | Gradient optimization failed, |grad| = 0.000001 | The MLE may be on the boundary of the parameter space."
+new_subject,20,1,2,2,practical,0.015352819999861822,0.05254185113918496,True,,
+new_subject,20,2,0,0,bound_once,0.017950458999621333,0.05059616953930437,True,True,
+new_subject,20,2,0,1,statsmodels,0.3008610609999778,0.05059618022005469,True,,The MLE may be on the boundary of the parameter space.
+new_subject,20,2,0,2,practical,0.01758438800015938,0.05059616953930437,True,,
+new_subject,20,2,1,0,practical,0.018470805999641016,0.05059616953930437,True,,
+new_subject,20,2,1,1,statsmodels,0.32527369299987186,0.05059618022005469,True,,The MLE may be on the boundary of the parameter space.
+new_subject,20,2,1,2,bound_once,0.018766030999813665,0.05059616953930437,True,True,
+new_subject,20,2,2,0,statsmodels,0.32164370500004225,0.05059618022005469,True,,The MLE may be on the boundary of the parameter space.
+new_subject,20,2,2,1,bound_once,0.01916785699995671,0.05059616953930437,True,True,
+new_subject,20,2,2,2,practical,0.016461061999962112,0.05059616953930437,True,,
+new_word,0,0,0,0,practical,0.015502846000345016,0.04205304466381308,True,,
+new_word,0,0,0,1,statsmodels,0.3063390580000487,0.0420530442218595,True,,The MLE may be on the boundary of the parameter space.
+new_word,0,0,0,2,bound_once,0.01919678100011879,0.04205304466381308,True,True,
+new_word,0,0,1,0,statsmodels,0.367992872999821,0.0420530442218595,True,,The MLE may be on the boundary of the parameter space.
+new_word,0,0,1,1,practical,0.016511197999989236,0.04205304466381308,True,,
+new_word,0,0,1,2,bound_once,0.018769936000353482,0.04205304466381308,True,True,
+new_word,0,0,2,0,bound_once,0.01886393799986763,0.04205304466381308,True,True,
+new_word,0,0,2,1,practical,0.01586284999984855,0.04205304466381308,True,,
+new_word,0,0,2,2,statsmodels,0.3129372959997454,0.0420530442218595,True,,The MLE may be on the boundary of the parameter space.
+new_word,0,1,0,0,bound_once,0.018685318999814626,0.04195200891232018,True,True,
+new_word,0,1,0,1,statsmodels,0.34780380900019736,0.04195200896088876,False,,"Maximum Likelihood optimization failed to converge. Check mle_retvals | MixedLM optimization failed, trying a different optimizer may help. | Gradient optimization failed, |grad| = 0.000000 | The MLE may be on the boundary of the parameter space."
+new_word,0,1,0,2,practical,0.01743749499974001,0.04195200891232018,True,,
+new_word,0,1,1,0,practical,0.016345435999937763,0.04195200891232018,True,,
+new_word,0,1,1,1,statsmodels,0.4018861289996494,0.04195200896088876,False,,"Maximum Likelihood optimization failed to converge. Check mle_retvals | MixedLM optimization failed, trying a different optimizer may help. | Gradient optimization failed, |grad| = 0.000000 | The MLE may be on the boundary of the parameter space."
+new_word,0,1,1,2,bound_once,0.021577792999778467,0.04195200891232018,True,True,
+new_word,0,1,2,0,practical,0.01722821900011695,0.04195200891232018,True,,
+new_word,0,1,2,1,bound_once,0.02237664299991593,0.04195200891232018,True,True,
+new_word,0,1,2,2,statsmodels,0.3321546520000993,0.04195200896088876,False,,"Maximum Likelihood optimization failed to converge. Check mle_retvals | MixedLM optimization failed, trying a different optimizer may help. | Gradient optimization failed, |grad| = 0.000000 | The MLE may be on the boundary of the parameter space."
+new_word,0,2,0,0,practical,0.015393650000078196,0.04189755545417513,True,,
+new_word,0,2,0,1,bound_once,0.01973154600000271,0.04189755545417513,True,True,
+new_word,0,2,0,2,statsmodels,0.3553244220001943,0.04189755628905952,True,,The MLE may be on the boundary of the parameter space.
+new_word,0,2,1,0,statsmodels,0.34574788500003706,0.04189755628905952,True,,The MLE may be on the boundary of the parameter space.
+new_word,0,2,1,1,bound_once,0.019192304000171134,0.04189755545417513,True,True,
+new_word,0,2,1,2,practical,0.015045906000068499,0.04189755545417513,True,,
+new_word,0,2,2,0,bound_once,0.016585749000114447,0.04189755545417513,True,True,
+new_word,0,2,2,1,statsmodels,0.30337891699991815,0.04189755628905952,True,,The MLE may be on the boundary of the parameter space.
+new_word,0,2,2,2,practical,0.014164395000079821,0.04189755545417513,True,,
+new_word,39,0,0,0,statsmodels,0.3610967139998138,0.0432472983369813,True,,The MLE may be on the boundary of the parameter space.
+new_word,39,0,0,1,bound_once,0.018393107000065356,0.04324730199996261,True,True,
+new_word,39,0,0,2,practical,0.015348612000252615,0.04324730199996261,True,,
+new_word,39,0,1,0,statsmodels,0.30192230800003017,0.0432472983369813,True,,The MLE may be on the boundary of the parameter space.
+new_word,39,0,1,1,practical,0.016792250999969838,0.04324730199996261,True,,
+new_word,39,0,1,2,bound_once,0.02050781800016921,0.04324730199996261,True,True,
+new_word,39,0,2,0,statsmodels,0.3456662320004398,0.0432472983369813,True,,The MLE may be on the boundary of the parameter space.
+new_word,39,0,2,1,practical,0.017165184000077716,0.04324730199996261,True,,
+new_word,39,0,2,2,bound_once,0.0198007310000321,0.04324730199996261,True,True,
+new_word,39,1,0,0,practical,0.020536220999929355,0.03693181807303551,True,,
+new_word,39,1,0,1,statsmodels,0.38796459400009553,0.03693181815867115,True,,The MLE may be on the boundary of the parameter space.
+new_word,39,1,0,2,bound_once,0.019248028000220074,0.03693181807303551,True,True,
+new_word,39,1,1,0,bound_once,0.020076237000012043,0.03693181807303551,True,True,
+new_word,39,1,1,1,practical,0.016725319999750354,0.03693181807303551,True,,
+new_word,39,1,1,2,statsmodels,0.36643603099992106,0.03693181815867115,True,,The MLE may be on the boundary of the parameter space.
+new_word,39,1,2,0,bound_once,0.02173955800026306,0.03693181807303551,True,True,
+new_word,39,1,2,1,statsmodels,0.4000195789999452,0.03693181815867115,True,,The MLE may be on the boundary of the parameter space.
+new_word,39,1,2,2,practical,0.022924396000234992,0.03693181807303551,True,,
+new_word,39,2,0,0,practical,0.02306638100026248,0.03520384705508886,True,,
+new_word,39,2,0,1,statsmodels,0.36808949699980076,0.03520384823634294,True,,The MLE may be on the boundary of the parameter space.
+new_word,39,2,0,2,bound_once,0.022151550000216957,0.03520384705508886,True,True,
+new_word,39,2,1,0,statsmodels,0.3939024619999145,0.03520384823634294,True,,The MLE may be on the boundary of the parameter space.
+new_word,39,2,1,1,bound_once,0.020104871000057756,0.03520384705508886,True,True,
+new_word,39,2,1,2,practical,0.017073977000109153,0.03520384705508886,True,,
+new_word,39,2,2,0,practical,0.017473599999902945,0.03520384705508886,True,,
+new_word,39,2,2,1,bound_once,0.019693029000336537,0.03520384705508886,True,True,
+new_word,39,2,2,2,statsmodels,0.32808487000011155,0.03520384823634294,True,,The MLE may be on the boundary of the parameter space.
+new_word,78,0,0,0,statsmodels,0.35502934700025435,0.04023914227042852,True,,The MLE may be on the boundary of the parameter space.
+new_word,78,0,0,1,practical,0.01786022399983267,0.04023912715143626,True,,
+new_word,78,0,0,2,bound_once,0.019281337999927928,0.04023912715143626,True,True,
+new_word,78,0,1,0,bound_once,0.018955676999667048,0.04023912715143626,True,True,
+new_word,78,0,1,1,practical,0.015824812000118982,0.04023912715143626,True,,
+new_word,78,0,1,2,statsmodels,0.31618856600016443,0.04023914227042852,True,,The MLE may be on the boundary of the parameter space.
+new_word,78,0,2,0,practical,0.016386279000016657,0.04023912715143626,True,,
+new_word,78,0,2,1,statsmodels,0.2863420290000249,0.04023914227042852,True,,The MLE may be on the boundary of the parameter space.
+new_word,78,0,2,2,bound_once,0.018903288000274188,0.04023912715143626,True,True,
+new_word,78,1,0,0,bound_once,0.018699480000123003,0.041208975118309,True,True,
+new_word,78,1,0,1,practical,0.01757157800011555,0.041208975118309,True,,
+new_word,78,1,0,2,statsmodels,0.3965950259998863,0.04120897547787706,True,,The MLE may be on the boundary of the parameter space.
+new_word,78,1,1,0,statsmodels,0.32292701100004706,0.04120897547787706,True,,The MLE may be on the boundary of the parameter space.
+new_word,78,1,1,1,practical,0.015272618999915721,0.041208975118309,True,,
+new_word,78,1,1,2,bound_once,0.01920078700004524,0.041208975118309,True,True,
+new_word,78,1,2,0,practical,0.017759169999862934,0.041208975118309,True,,
+new_word,78,1,2,1,statsmodels,0.38603155999999217,0.04120897547787706,True,,The MLE may be on the boundary of the parameter space.
+new_word,78,1,2,2,bound_once,0.021104949999880773,0.041208975118309,True,True,
+new_word,78,2,0,0,statsmodels,0.39413303200035443,0.03745295134247359,True,,The MLE may be on the boundary of the parameter space.
+new_word,78,2,0,1,bound_once,0.019639919999917765,0.03745295133803486,True,True,
+new_word,78,2,0,2,practical,0.016121851000207243,0.03745295133803486,True,,
+new_word,78,2,1,0,bound_once,0.01896112499980518,0.03745295133803486,True,True,
+new_word,78,2,1,1,statsmodels,0.320844778999799,0.03745295134247359,True,,The MLE may be on the boundary of the parameter space.
+new_word,78,2,1,2,practical,0.01656623100006982,0.03745295133803486,True,,
+new_word,78,2,2,0,bound_once,0.018193116000020382,0.03745295133803486,True,True,
+new_word,78,2,2,1,statsmodels,0.3231036580000364,0.03745295134247359,True,,The MLE may be on the boundary of the parameter space.
+new_word,78,2,2,2,practical,0.018257161999827076,0.03745295133803486,True,,

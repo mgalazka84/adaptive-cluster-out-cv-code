@@ -1,0 +1,13 @@
+kind,setting,comparisons,agreements,final_pass,fallbacks,checks,steps,active_tests_not_separated
+intercept,armijo_1e-3,8,8,288,0,1571,1571,45
+intercept,budget_16_28,8,8,288,0,1574,1574,45
+intercept,budget_4_7,8,8,84,204,1124,1124,28
+intercept,budget_8_14,8,8,273,15,1551,1551,44
+intercept,default,8,8,288,0,1574,1574,45
+intercept,floor_high,8,8,288,0,1515,1515,37
+intercept,floor_low,8,8,288,0,1609,1609,29
+intercept,guard_1e-8,8,8,288,0,1574,1574,45
+intercept,guard_zero,8,8,288,0,1574,1574,45
+intercept,radius_1.5,8,8,288,0,1573,1573,44
+intercept,radius_3,8,8,288,0,1599,1599,25
+slope,default,12,12,192,0,987,987,31

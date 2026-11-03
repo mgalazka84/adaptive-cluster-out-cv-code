@@ -1,0 +1,30 @@
+Additional training-only and five-component study
+
+Historical benchmark commit: 690e35399039305ca4126f9218de408d4a64fd48.
+New outputs are separate under results/revision_study; historical outputs
+are not overwritten by these commands. Plans are written before outcomes.
+
+Dependencies for this run: Python 3.12, NumPy 2.3.5, SciPy 1.17.0,
+pandas 2.2.3, statsmodels 0.15.0, matplotlib (exact runtime metadata retained).
+Set OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1.
+
+python code/run_revision_study.py
+python code/check_linear_psd.py
+python code/audit_external_timing.py
+python code/analyze_revision_study.py
+
+The extended adaptive API uses training-only starts when starts=None.
+Initial/cumulative default budgets are then 12/20; explicitly supplied
+full-data starts retain historical 4/7 defaults. Bounds, optimizer floors,
+Armijo constant, budgets and selection guards have explicit optional
+arguments. No accepted-test count includes numerical fallback.
+
+The 20 additional datasets and 11 sensitivity settings were fixed before
+execution. All are retained, including 204 fallbacks with training-only
+4/7 budgets. Timing diagnostics here are not directly pooled with older
+machine timings. External strict-BFGS timings are not package-default
+speed comparisons. Five-component models have independent random slopes,
+not estimated unstructured random-effect covariance matrices.
+
+Code identifiers containing certificate remain for API compatibility;
+all numerical tests use ordinary binary64 and are not rounding verified.

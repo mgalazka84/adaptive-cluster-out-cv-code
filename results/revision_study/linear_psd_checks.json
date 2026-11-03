@@ -1,0 +1,6 @@
+{
+  "prediction_identity_checks": 16,
+  "max_error": 3.967746270427952e-15,
+  "status": "passed",
+  "scope": "Numerical regression test, not a proof or verified arithmetic."
+}

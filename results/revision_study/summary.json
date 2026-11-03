@@ -1,0 +1,32 @@
+{
+  "default_fits": 480,
+  "default_pass": 480,
+  "default_model_agreements": 20,
+  "active_second_branch_larger": 297,
+  "active_coordinate_tests": 333,
+  "positive_width_misses": 0,
+  "zero_width_misses": 14,
+  "max_excess": 5.551115123125783e-16,
+  "loss_ratio_quantiles": {
+    "0.5": 4.454643405026278,
+    "0.95": 55.21686971074845,
+    "1.0": 2670.6500255059277
+  },
+  "start_active_mismatches": 0,
+  "start_max_loss_difference": 8.785083771556401e-12,
+  "external_seconds_medians": {
+    "bound_once": 0.019198784000081952,
+    "practical": 0.01648612999997565,
+    "statsmodels": 0.3482162459999927
+  },
+  "paired_bound_once_over_practical": 1.1536936546261614,
+  "paired_added_seconds": 0.0026003344999025995,
+  "external_max_loss_difference": 2.482388910401978e-08,
+  "numerical_scale_ge_proxy": 1,
+  "scale_comparisons": 231,
+  "numerical_to_proxy_quantiles": {
+    "0.5": 0.06818822950268282,
+    "0.95": 0.31601410980481215,
+    "1.0": 1.4829467366577167
+  }
+}

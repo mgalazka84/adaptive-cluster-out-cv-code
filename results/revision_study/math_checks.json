@@ -1,0 +1,21 @@
+{
+  "max_absolute_errors": {
+    "gradient": 1.9211694457510475e-09,
+    "hessian": 1.1898279694833036e-08,
+    "prediction_identity": 6.794586594749408e-15,
+    "gradient_kernel": 1.865174681370263e-14,
+    "compression_objective": 1.4210854715202004e-14,
+    "compression_gradient": 1.7763568394002505e-14,
+    "compression_hessian": 6.750155989720952e-14,
+    "compression_prediction": 3.774758283725532e-15
+  },
+  "gradient_checks": 18,
+  "hessian_entries": 54,
+  "prediction_identity_checks": 48,
+  "local_root_checks": 13,
+  "loss_enclosure_checks": 13,
+  "compression_instances": 6,
+  "identical_model_tie_checks": 1,
+  "status": "passed",
+  "warning": "Numerical tests do not prove the theorems or directed-rounding validity."
+}
