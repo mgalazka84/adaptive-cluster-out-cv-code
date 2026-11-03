@@ -1,0 +1,22 @@
+{
+  "study": "Repeated timing of the prospective training-only default",
+  "baseline_code_commit": "d2232d59269ba068257ce07c7463967ff3c3b5e3",
+  "simulation_seeds": [74003000,74003001,74003002,74003003,74003004,74003005,74003006,74003007,74003008,74003009,74003010,74003011,74003012,74003013,74003014,74003015,74003016,74003017,74003018,74003019],
+  "simulation_regime": "many_levels: 30 by 24 crossed factors, two replicates, eight fixed-effect candidates; same data generation as accuracy_v2/fresh",
+  "lexdec_targets": ["new_subject", "new_word"],
+  "methods": ["newton", "lbfgs", "practical", "default_lbfgs", "bound_once", "adaptive", "norm_only"],
+  "initialization": "Every method uses max(var(training_y),1e-5)*(0.5,0.25,0.25), separately for each fold. No full-data fit is computed.",
+  "adaptive_initial_budget": 12,
+  "adaptive_cumulative_budget": 20,
+  "selection_atol": 1e-10,
+  "selection_rtol": 1e-10,
+  "simulation_timing_repetitions": 3,
+  "lexdec_timing_repetitions": 7,
+  "canonical_run": "Untimed run of every method before randomized timing repetitions, with raw outputs and adaptive traces retained.",
+  "random_order": "NumPy default_rng(seed+700000); one fresh permutation of all methods per repetition. lexdec seeds 88001 and 88002.",
+  "timing_scope": "Kernel includes fitting, prediction and method-required local tests; total includes shared fold preparation once. No concurrent numerical jobs; one BLAS/OpenMP thread.",
+  "comparisons": "Report absolute times and comparator/adaptive paired kernel and total-time ratios; strict baseline is the faster median of strict Newton and L-BFGS-B. Keep unresolved local-bound comparisons separate from point choices.",
+  "retention": "Retain all planned jobs, failed local tests, numerical fallbacks, unresolved comparisons and warning/error records; do not drop unfavorable timing repetitions.",
+  "budget_provenance": "12/20 was an engineering choice made before the prior revision-study execution; no separate prior tuning experiment or data-derived optimality claim exists. The previous plan and results were committed together. This new plan is committed before execution.",
+  "optional_real_slope_extension": "Not part of this timing study. The candidate models and data are held fixed to isolate initialization and budget costs."
+}
