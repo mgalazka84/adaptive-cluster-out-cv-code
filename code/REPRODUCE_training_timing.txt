@@ -1,0 +1,41 @@
+REPEATED TRAINING-ONLY TIMING
+
+Plan-only commit (before execution):
+5fea66834efbe9bff415542d60c4a3a269fbfaf4
+Baseline implementation: d2232d59269ba068257ce07c7463967ff3c3b5e3
+
+Install code/requirements.txt in a disposable checkout. Run from repository root:
+
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python code/run_training_timing.py
+OPENBLAS_NUM_THREADS=1 python code/analyze_training_timing.py
+
+The first command overwrites results/training_timing/*.csv and environment.json.
+It does not change plan.json. Do not run other numerical jobs during timings.
+The second command reads .csv or, when it is absent, .csv.gz. Compressed raw
+files are lossless copies; after a fresh rerun the uncompressed files take precedence.
+
+The fixed plan reuses the 20 large fresh datasets and both complete lexdec
+targets, with training-only starts for all seven methods and 12/20 adaptive
+budgets. Every method has an untimed run; simulations have three randomized
+timing repetitions and lexical targets have seven. Keep all repetitions.
+
+Kernels include fitting, scoring and required local tests. Total time adds
+shared fold preparation once. No full-data fit is performed. The strict
+baseline uses the faster median of strict Newton and strict L-BFGS-B.
+Ratios are comparator/adaptive, so values below one favor the comparator.
+Do not pool these timings with the archived full-data-start 4/7 benchmark.
+
+Retained outputs: plan, per-comparison runs, per-repetition timings, per-fold
+audits, every adaptive local-test attempt, scheduler decisions, execution log,
+environment, and derived timing/work/containment summaries. The analyzer
+checks planned coverage and recomputes medians and ratios from raw timings.
+All selections and all final local tests agree in the retained run, but the
+large-simulation warm-start speed advantage does not persist under training-only
+initialization. The real-data bound-once/adaptive total ratios are near parity.
+Ordinary binary64 acceptance is not directed-rounding verification or a global
+optimality guarantee. Timings depend on machine and load.
+
+Budget provenance: 12/20 was an engineering work limit chosen before the earlier
+revision study; no separately recorded pilot or data-derived optimality claim
+exists. The earlier plan and results were committed together. This timing plan
+was committed separately before its first execution.

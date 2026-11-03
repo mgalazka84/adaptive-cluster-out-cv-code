@@ -1,0 +1,54 @@
+{
+  "comparisons": 22,
+  "fits": 5100,
+  "timed_runs": 518,
+  "all_methods_all_choices_agree": true,
+  "repeated_choices_identical": true,
+  "valid_final": 5100,
+  "fallbacks": 0,
+  "anchor_fallbacks": 0,
+  "strict_references_in_uniqueness_region": true,
+  "reference_active_sets_match": true,
+  "positive_width_misses": 0,
+  "zero_width_misses": 0,
+  "max_raw_excess": 0.0,
+  "max_strict_loss_difference": 7.720490913243339e-13,
+  "bound_once_resolved": 22,
+  "bound_once_valid": 5100,
+  "adaptive_rounds": 32,
+  "norm_rounds": 184,
+  "local_test_attempts": 32443,
+  "all_practical_faster": true,
+  "all_bound_once_faster": false,
+  "all_strict_faster": false,
+  "relative_range_by_method": {
+    "adaptive": {
+      "median": 0.1344812390902747,
+      "p95": 0.22590068108596748
+    },
+    "bound_once": {
+      "median": 0.12654944072683386,
+      "p95": 0.255239709405448
+    },
+    "default_lbfgs": {
+      "median": 0.11066427572019902,
+      "p95": 0.2621436991833381
+    },
+    "lbfgs": {
+      "median": 0.11597725432350606,
+      "p95": 0.25353841301961627
+    },
+    "newton": {
+      "median": 0.08824846559756253,
+      "p95": 0.3296170928607004
+    },
+    "norm_only": {
+      "median": 0.10648838291456181,
+      "p95": 0.29900494637508374
+    },
+    "practical": {
+      "median": 0.10274971527332036,
+      "p95": 0.3156762590354906
+    }
+  }
+}

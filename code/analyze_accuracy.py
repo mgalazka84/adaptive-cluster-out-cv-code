@@ -98,7 +98,7 @@ fig.legend(*ax[0].get_legend_handles_labels(),loc='outside lower center',ncol=3,
 for j,r in enumerate(['boundary','zero_a','zero_both']):
  d=R[(R.suite=='original')&(R.regime==r)]
  ax[1].plot([0,1],[d.interior_only_speedup_total.median(),d.strict_speedup_total.median()],marker='o',color=colors[j],label=['Near-zero A','Zero A','Zero A and B'][j])
-ax[1].axhline(1,color='gray',ls=':');ax[1].set_xticks([0,1],['Interior test','With face test']);ax[1].set_ylabel('Strict refit / total time');ax[1].set_title('B  Boundary ablation',loc='left');ax[1].legend(fontsize=9)
+ax[1].axhline(1,color='gray',ls=':');ax[1].set_xticks([0,1],['Interior test','With face test']);ax[1].set_ylabel('Strict refit / adaptive total time');ax[1].set_title('B  Boundary ablation',loc='left');ax[1].legend(fontsize=9)
 for j,d in enumerate(sets):
  ax[2].scatter(d.paired_fold_se_proxy,d.cv_gap,s=12,alpha=.65,label=labels[j].replace('\n',' '),color=colors[j])
 lims=[1e-5,1];ax[2].plot(lims,lims,ls=':',color='gray');ax[2].set(xscale='log',yscale='log',xlabel='Paired fold SE proxy',ylabel='Top-two reference CV gap');ax[2].set_title('C  Gap and fold variation',loc='left');ax[2].legend(fontsize=9,loc='upper left')
@@ -131,3 +131,4 @@ for j,regime in enumerate(['new_subject','new_word']):
 ax[2].axhline(0,color='gray',ls=':');ax[2].set_xticks([0,1],['Participant','Word']);ax[2].set_ylabel('Fold loss difference: M2 − M3');ax[2].set_title('C  Paired differences',loc='left')
 fig.savefig(OUT/'Fig7.pdf',bbox_inches='tight');plt.close(fig)
 print(json.dumps(checks,indent=2))
+
