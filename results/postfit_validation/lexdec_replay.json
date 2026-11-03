@@ -1,0 +1,15 @@
+{
+  "scope": "untimed replay of the existing training-only lexdec comparisons",
+  "fits": 300,
+  "comparisons": 2,
+  "local_tests_pass": 300,
+  "reference_active_sets_match": true,
+  "references_in_uniqueness_balls": true,
+  "raw_loss_containment_misses": 0,
+  "selected_models": [
+    3,
+    3
+  ],
+  "max_difference_from_archived_losses": 9.8879238130678e-17,
+  "original_timing_outputs_unchanged": true
+}
