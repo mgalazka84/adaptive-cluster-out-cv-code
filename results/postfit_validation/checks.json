@@ -1,0 +1,19 @@
+{
+  "scope": "functional regression checks; no new performance experiment",
+  "training_only_first_stage": {
+    "valid_fits": 24,
+    "winner": 1,
+    "additional_updates": 0
+  },
+  "archived_full_data_start_repair": {
+    "initial_valid_fits": 35,
+    "total_fits": 36,
+    "additional_updates": 1,
+    "winner": 1
+  },
+  "identical_candidates": {
+    "winner": null,
+    "fallback_fits": 16
+  },
+  "checks_passed": true
+}

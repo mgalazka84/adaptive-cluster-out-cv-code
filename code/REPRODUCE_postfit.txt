@@ -1,0 +1,27 @@
+Recommended post-fit validation
+
+postfit_validation.postfit_validate(folds) uses a practical L-BFGS-B fit
+from each fold's training-only moment start, followed by one local test.
+It repairs failed tests and refines overlapping model intervals only as
+needed. Fallbacks are explicitly numerical; ties can remain unresolved.
+The returned resolved_by_local_bounds flag requires every fit to have
+an accepted local test. Binary64 calculations are not rounding-verified.
+
+Run from the repository root with dependencies in code/requirements.txt:
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python code/check_postfit_validation.py
+
+The checks cover agreement with independently evaluated one-test bounds,
+zero refinement for an initially separated training-only comparison, the
+previously archived one-update repair, and unresolved identical candidates.
+Their output is results/postfit_validation/checks.json. These are functional
+checks, not new timing evidence or independently sampled validation data.
+
+Training-only timing evidence remains in results/training_timing/ at commit
+e05fc3ec76edabdd627a5da2617a4da1e89d9083. Its bound_once method is the
+post-fit procedure's first stage, which resolves all 22 comparisons.
+The historical 231-comparison study resolves 230 comparisons in that stage;
+results/accuracy_v2/summary/certify_once_completion.json retains the separate
+cached completion diagnostic for the other case. No new end-to-end timing
+of the hybrid wrapper or its 12/20 post-fit repair budgets is claimed.
+The archived boundary_acv.adaptive function and all earlier plans and raw
+results are unchanged. It remains the adaptive-from-start comparator.
