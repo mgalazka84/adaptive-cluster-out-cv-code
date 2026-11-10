@@ -1,0 +1,77 @@
+{
+  "strict_training_overlap": {
+    "targets": {
+      "new_subject": {
+        "sum": 63,
+        "count": 63
+      },
+      "new_word": {
+        "sum": 237,
+        "count": 237
+      }
+    },
+    "statuses": {
+      "false": {
+        "total": 47,
+        "inside": 47,
+        "minimum_fraction": 0.001927571341763308,
+        "median_fraction": 0.19712640040612145
+      },
+      "true": {
+        "total": 253,
+        "inside": 253,
+        "minimum_fraction": 0.003972128013253705,
+        "median_fraction": 0.1774100563475712
+      }
+    }
+  },
+  "simulation": {
+    "datasets": 20,
+    "median_scale_ratio": 0.00019176990378045661,
+    "maximum_scale_ratio": 0.0006307232120268082,
+    "paired_timing_ratios": {
+      "large_fresh": {
+        "strict_total_ratio": 0.7877810327558976,
+        "practical_total_ratio": 0.5991865017103085,
+        "bound_once_total_ratio": 0.7298379549767013,
+        "check_practical": 1.2287904060494756
+      },
+      "new_subject": {
+        "strict_total_ratio": 1.0417874183414235,
+        "practical_total_ratio": 0.8486976709615957,
+        "bound_once_total_ratio": 1.0172689620027096,
+        "check_practical": 1.1986234872662234
+      },
+      "new_word": {
+        "strict_total_ratio": 1.0659313257303293,
+        "practical_total_ratio": 0.9091074738633443,
+        "bound_once_total_ratio": 1.0197105427049094,
+        "check_practical": 1.1216611589073688
+      }
+    },
+    "training_practical_and_check_agree": 22
+  },
+  "defaults": {
+    "within_fold_changes": [
+      {
+        "dataset": "orchard",
+        "target": "column",
+        "label": "5",
+        "default": "Treatment",
+        "strict": "Dilution"
+      }
+    ],
+    "timing": {
+      "lexdec": {
+        "package_ms": 402.56543350005813,
+        "first_check_ms": 17.92541499980871,
+        "check_over_fit": 0.04283815644596375
+      },
+      "orchard": {
+        "package_ms": 69.09159600036219,
+        "first_check_ms": 0.7138354994822294,
+        "check_over_fit": 0.010387063452445743
+      }
+    }
+  }
+}

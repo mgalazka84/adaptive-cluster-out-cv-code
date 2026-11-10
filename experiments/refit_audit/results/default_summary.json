@@ -1,0 +1,38 @@
+{
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "scipy": "1.17.0",
+  "statsmodels": "0.14.6",
+  "fit_call": "MixedLM.fit()",
+  "per_dataset": {
+    "lexdec": {
+      "attempted": 300,
+      "returned": 300,
+      "optimizer_converged": 300,
+      "first_valid": 300,
+      "first_same_ball": 300,
+      "after_valid": 300,
+      "after_same_ball": 300,
+      "max_steps": 0,
+      "max_mse_discrepancy": 5.376699085957171e-12,
+      "reasons": {
+        "interior": 300
+      }
+    },
+    "orchard": {
+      "attempted": 48,
+      "returned": 48,
+      "optimizer_converged": 16,
+      "first_valid": 0,
+      "first_same_ball": 0,
+      "after_valid": 48,
+      "after_same_ball": 48,
+      "max_steps": 6,
+      "max_mse_discrepancy": 3.4416913763379853e-15,
+      "reasons": {
+        "nonpositive_face_curvature": 44,
+        "free_variance_boundary": 4
+      }
+    }
+  }
+}

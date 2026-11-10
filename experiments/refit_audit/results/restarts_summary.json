@@ -1,0 +1,20 @@
+{
+  "lexdec": {
+    "fits": 300,
+    "starts": 1200,
+    "same_face_and_ball": 1200,
+    "max_fold_objective_range": 9.094947017729282e-13,
+    "max_fold_loss_range": 3.0253577421035516e-15,
+    "max_projected_gradient": 9.022187441587448e-10
+  },
+  "orchard": {
+    "fits": 48,
+    "starts": 192,
+    "same_face_and_ball": 192,
+    "max_fold_objective_range": 1.0658141036401503e-14,
+    "max_fold_loss_range": 8.435196985345783e-13,
+    "max_projected_gradient": 8.925198358156194e-10,
+    "min_design_rank": 3,
+    "min_normalised_design_singular": 0.6925196749071221
+  }
+}

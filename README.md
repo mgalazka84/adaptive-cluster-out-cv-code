@@ -4,6 +4,7 @@ This repository contains the code, data provenance and numerical results for loc
 
 | Experiment or check | How to reproduce it | Recorded results |
 | --- | --- | --- |
+| Default statsmodels fits, training-only overlap, restarts and interval diagnostics | [Methods and reproduction commands](experiments/refit_audit/) | [Fold outputs, figures and timing](experiments/refit_audit/results/) |
 | Training-only refits and timing | [Timing protocol](code/REPRODUCE_training_timing.txt) | [Timing plan, runs and summaries](results/training_timing/) |
 | Lexical-decision post-fit intervals | [Post-fit validation](code/REPRODUCE_postfit.txt) | [Interval and fold outputs](results/postfit_validation/) |
 | Independent random slopes, starting values and external timing | [Sensitivity study](code/REPRODUCE_revision.txt) | [Fit traces, comparisons and numerical checks](results/revision_study/) |
