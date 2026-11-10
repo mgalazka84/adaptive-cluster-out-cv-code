@@ -1,0 +1,11 @@
+{
+  "decimal_precision": 60,
+  "mpmath": "1.3.0",
+  "n_fits": 48,
+  "matched_faces": 48,
+  "nonzero_widths": 16,
+  "covered_nonzero": 16,
+  "covered_zero_widths": 0,
+  "max_excess": "9.05501349846e-16",
+  "min_column_kkt": "10.7263351678"
+}

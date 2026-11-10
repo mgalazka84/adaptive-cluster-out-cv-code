@@ -1,0 +1,15 @@
+OrchardSprays — data provenance
+
+R datasets / OrchardSprays. The R documentation describes a balanced 8 by 8 Latin-square experiment in which the reduction in solution volume was observed for seven dilutions of lime sulphur and one control. The source cited by R is D. J. Finney (1947), Probit Analysis, Cambridge University Press.
+Documentation: https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/OrchardSprays.html
+
+OrchardSprays.csv is the numerical transcription distributed by Rdatasets:
+https://vincentarelbundock.github.io/Rdatasets/csv/datasets/OrchardSprays.csv
+CSV SHA-256: 0b99f6c751961e11db018b6bc1d805288cac57ecffde42a88d384229fe7b0041
+CSV Git blob: 7e6e3f168e004f4610f9e959c1a890b23c19ae86
+
+All rows and all four data variables were compared with the data definition in R:
+https://github.com/wch/r-source/blob/trunk/src/library/datasets/data/OrchardSprays.R
+R source Git blob: 3492e5c11a09f1c98bba1b9c175a2746fb2483e3
+
+The CSV row-name column is ignored. The script retains every observation and uses the natural logarithm of the recorded decrease. The file response_binary64.hex stores those 64 transformed values exactly as binary64 numbers for comparing endpoints at higher precision. Data sources retain their respective notices.

@@ -1,0 +1,35 @@
+{
+  "data_sha256": "0b99f6c751961e11db018b6bc1d805288cac57ecffde42a88d384229fe7b0041",
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "scipy": "1.17.0",
+  "targets": [
+    {
+      "target": "row",
+      "winner": "Treatment",
+      "first_accepted": 24,
+      "first_separated": true,
+      "locally_resolved": true,
+      "extra_updates": 0,
+      "fallbacks": 0
+    },
+    {
+      "target": "column",
+      "winner": "Treatment",
+      "first_accepted": 24,
+      "first_separated": true,
+      "locally_resolved": true,
+      "extra_updates": 0,
+      "fallbacks": 0
+    }
+  ],
+  "n_fits": 48,
+  "boundary_fits": 48,
+  "double_zero": 17,
+  "min_active_lower": 7.127195339616003,
+  "same_faces": 48,
+  "dense_roots_in_ball": 48,
+  "raw_contained": 19,
+  "max_raw_excess": 5.551115123125783e-15,
+  "max_dense_projected_gradient": 5.807976322103059e-10
+}
