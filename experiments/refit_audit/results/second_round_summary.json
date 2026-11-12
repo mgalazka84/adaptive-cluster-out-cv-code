@@ -1,0 +1,61 @@
+{
+  "basic_diagnostics": {
+    "fits": 48,
+    "gradient_flags": 48,
+    "curvature_flags": 44,
+    "either_flags": 48,
+    "min_gradient": 11.92803675875108,
+    "max_gradient": 79.91957462563306,
+    "gradient_tolerance": 1e-06,
+    "curvature_threshold": 0,
+    "coordinates": "Original, unscaled variance coordinates; strictly positive components are free."
+  },
+  "timing": {
+    "default_timing.csv": {
+      "fits": 18,
+      "repetitions": 3,
+      "package_ms": 69.09159600036219,
+      "within_fit_relative_range_median": 0.21972204527860612,
+      "within_fit_relative_range_q25": 0.14036098709457162,
+      "within_fit_relative_range_q75": 0.36028439162968123,
+      "package_median_by_repetition": {
+        "1": 69.09159600036219,
+        "2": 71.43695349986956,
+        "3": 62.374070499572554
+      }
+    },
+    "orchard_repair_timing.csv": {
+      "fits": 18,
+      "repetitions": 3,
+      "package_ms": 102.2049449993574,
+      "within_fit_relative_range_median": 0.4747580134385996,
+      "within_fit_relative_range_q25": 0.307940082135421,
+      "within_fit_relative_range_q75": 0.745690247511505,
+      "package_median_by_repetition": {
+        "1": 114.7384294990843,
+        "2": 106.89723500036052,
+        "3": 97.7222689998598
+      }
+    },
+    "simulation_strict_over_checked_practical": {
+      "datasets": 20,
+      "median": 1.036165726834433,
+      "minimum": 0.9797298763746826,
+      "maximum": 1.131336857474829
+    }
+  },
+  "budgets": {
+    "budget_4_7": {
+      "datasets": 8,
+      "fits": 288,
+      "passed": 84,
+      "fallbacks": 204
+    },
+    "default": {
+      "datasets": 8,
+      "fits": 288,
+      "passed": 288,
+      "fallbacks": 0
+    }
+  }
+}

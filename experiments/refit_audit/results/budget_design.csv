@@ -1,0 +1,17 @@
+seed,regime,setting,components,n_observations,candidates,held_out_groups,fits,passed,fallbacks
+93003000,balanced,default,3,240,3,12,36,36,0
+93003000,balanced,budget_4_7,3,240,3,12,36,2,34
+93003001,boundary,default,3,240,3,12,36,36,0
+93003001,boundary,budget_4_7,3,240,3,12,36,5,31
+93003002,zero_both,default,3,240,3,12,36,36,0
+93003002,zero_both,budget_4_7,3,240,3,12,36,14,22
+93003003,near_tie,default,3,240,3,12,36,36,0
+93003003,near_tie,budget_4_7,3,240,3,12,36,10,26
+93003004,balanced,default,3,240,3,12,36,36,0
+93003004,balanced,budget_4_7,3,240,3,12,36,2,34
+93003005,boundary,default,3,240,3,12,36,36,0
+93003005,boundary,budget_4_7,3,240,3,12,36,0,36
+93003006,zero_both,default,3,240,3,12,36,36,0
+93003006,zero_both,budget_4_7,3,240,3,12,36,28,8
+93003007,near_tie,default,3,240,3,12,36,36,0
+93003007,near_tie,budget_4_7,3,240,3,12,36,23,13
